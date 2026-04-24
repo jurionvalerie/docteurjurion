@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr Valérie Jurion-Daclin — Psychiatre à Claira / Perpignan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a2a3a;
+  --ink-soft: #3a4f62;
+  --ink-muted: #6a84a0;
+  --sky-50: #EEF5FC;
+  --sky-100: #C8DEFA;
+  --sky-200: #9EC4F5;
+  --sky-600: #2B6CB0;
+  --sky-800: #1A4A82;
+  --blue-bg: #DBE9F8;
+  --blue-card: #EEF5FC;
+  --blue-hero: #1a3a5c;
+  --teal: #1a7a6a;
+  --teal-light: #5aada0;
+  --teal-pale: #DDF0EC;
+  --gold: #B8963A;
+  --gold-pale: #F8F2E2;
+  --coral: #A85C3C;
+  --coral-pale: #F5EAE4;
+  --purple-pale: #EEEDFE;
+  --green-pale: #E8F3DE;
+  --border: rgba(43,108,176,0.13);
+  --border-card: rgba(43,108,176,0.18);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 20px rgba(26,58,92,0.08);
+  --shadow-lg: 0 12px 40px rgba(26,58,92,0.14);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--blue-bg);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* NAV */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:200;
+  background: rgba(219,233,248,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 64px;
+  display: flex; align-items: center;
+  padding: 0 2rem; gap: 1.5rem;
+}
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-weight: 600;
+  color: var(--blue-hero); text-decoration: none;
+  white-space: nowrap; flex-shrink: 0;
+}
+.nav-brand span { color: var(--teal); }
+.nav-links {
+  display: flex; gap: 0; overflow-x: auto;
+  scrollbar-width: none; flex: 1; align-items: center;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-link {
+  font-size: 13px; font-weight: 400;
+  color: var(--ink-soft); text-decoration: none;
+  padding: 5px 12px; border-radius: 20px;
+  white-space: nowrap; transition: all 0.15s; cursor: pointer;
+}
+.nav-link:hover { background: var(--sky-100); color: var(--sky-600); }
+.nav-link.active { background: var(--sky-600); color: white; font-weight: 500; }
+
+/* PAGES */
+.page { display: none; padding-top: 64px; min-height: 100vh; }
+.page.active { display: block; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(150deg, #1a3a5c 0%, #0d2440 100%);
+  color: white; padding: 4rem 2rem 3.5rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:500px; height:500px;
+  background: radial-gradient(circle, rgba(90,173,160,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 880px; margin: 0 auto; position: relative; z-index:1; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap:8px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px; padding: 4px 14px;
+  font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase;
+  margin-bottom: 1.5rem; color: rgba(255,255,255,0.8);
+}
+.hero-layout { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: center; }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem,4.5vw,3.2rem); font-weight: 700;
+  line-height: 1.15; margin-bottom: 1rem;
+}
+.hero h1 em { font-style: italic; color: var(--teal-light); }
+.hero-sub { font-size: 16px; font-weight: 300; opacity: 0.78; max-width: 460px; margin-bottom: 2rem; line-height: 1.65; }
+.hero-contacts {
+  display: flex; flex-direction: column; gap: 0.6rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  font-size: 14px;
+}
+.hero-contact-item { display: flex; align-items: center; gap: 10px; opacity: 0.85; }
+.hero-contact-item strong { opacity: 1; color: white; }
+.hero-img-wrap {
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  border: 3px solid rgba(255,255,255,0.15);
+}
+.hero-img-wrap img { width: 100%; display: block; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.75rem; }
+.btn {
+  display: inline-flex; align-items: center; gap:8px;
+  padding: 11px 22px; border-radius: 8px; font-size: 14px;
+  font-weight: 500; text-decoration: none; cursor: pointer;
+  border: none; transition: all 0.2s; letter-spacing: 0.02em;
+  font-family: 'Outfit', sans-serif;
+}
+.btn-primary { background: var(--teal-light); color: var(--blue-hero); }
+.btn-primary:hover { background: white; }
+.btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+/* SECTION */
+.wrap { max-width: 880px; margin: 0 auto; padding: 3.5rem 2rem; }
+.sec-label {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--teal); margin-bottom: 0.6rem;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem,3vw,2rem); font-weight: 700;
+  line-height: 1.25; margin-bottom: 0.85rem; color: var(--blue-hero);
+}
+.sec-intro { font-size: 15px; color: var(--ink-soft); max-width: 640px; line-height: 1.75; }
+
+/* CARDS */
+.card {
+  background: var(--blue-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius);
+  padding: 1.5rem; transition: all 0.2s;
+}
+.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap:1rem; margin-top:2rem; }
+.card-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:0.85rem; }
+.card h3 { font-size:14.5px; font-weight:600; margin-bottom:0.35rem; color:var(--blue-hero); }
+.card p { font-size:13px; color:var(--ink-muted); line-height:1.55; }
+.card.clickable { cursor:pointer; text-decoration:none; color:inherit; display:block; }
+
+/* INFO GRID */
+.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-top:1.75rem; }
+.info-card { background:var(--blue-card); border:1px solid var(--border-card); border-radius:var(--radius); padding:1.5rem; }
+.info-card h4 { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:0.85rem; }
+.info-card p, .info-card li { font-size:14.5px; color:var(--ink-soft); line-height:1.75; }
+.info-card ul { padding-left:1.2rem; }
+
+/* DIVIDER */
+hr.div { border:none; border-top:1px solid var(--border); margin:0; }
+
+/* ACCORDION */
+.acc { background:var(--blue-card); border:1px solid var(--border-card); border-radius:var(--radius); margin-bottom:0.9rem; overflow:hidden; }
+.acc-h { padding:1rem 1.4rem; display:flex; align-items:center; gap:0.9rem; cursor:pointer; user-select:none; transition:background 0.15s; }
+.acc-h:hover { background: rgba(43,108,176,0.07); }
+.acc-badge { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:0.05em; flex-shrink:0; }
+.acc-title { font-size:14.5px; font-weight:500; flex:1; color:var(--blue-hero); }
+.acc-arrow { color:var(--ink-muted); font-size:11px; transition:transform 0.2s; }
+.acc-arrow.open { transform:rotate(180deg); }
+.acc-body { display:none; padding:0 1.4rem 1.4rem; border-top:1px solid var(--border); }
+.acc-body.open { display:block; }
+.acc-body p { font-size:14.5px; margin-top:1rem; line-height:1.75; color:var(--ink-soft); }
+.acc-body ul,.acc-body ol { padding-left:1.4rem; font-size:14.5px; line-height:1.9; margin-top:0.75rem; color:var(--ink-soft); }
+.acc-body li { margin-bottom:0.2rem; }
+.acc-body strong { font-weight:500; color:var(--ink); }
+.step-box {
+  background: rgba(43,108,176,0.06);
+  border-left: 3px solid var(--sky-200);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.2rem; margin-top:1rem;
+  font-size:14px; line-height:1.8; color:var(--ink-soft);
+}
+.hl-box { border-radius:var(--radius-sm); padding:1rem 1.2rem; margin-top:1rem; font-size:14px; line-height:1.8; }
+.hl-teal { background:var(--teal-pale); border-left:3px solid var(--teal-light); color:var(--ink-soft); }
+.hl-gold { background:var(--gold-pale); border-left:3px solid var(--gold); color:var(--ink-soft); }
+.hl-blue { background:var(--sky-50); border-left:3px solid var(--sky-200); color:var(--ink-soft); }
+.hl-coral { background:var(--coral-pale); border-left:3px solid var(--coral); color:var(--ink-soft); }
+.hl-label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:0.4rem; display:block; color:var(--ink-muted); }
+
+/* BADGES */
+.b-teal { background:var(--teal-pale); color:#145a4e; }
+.b-blue { background:var(--sky-50); color:var(--sky-800); }
+.b-gold { background:var(--gold-pale); color:#6b530f; }
+.b-coral { background:var(--coral-pale); color:var(--coral); }
+.b-purple { background:var(--purple-pale); color:#3c3489; }
+.b-green { background:var(--green-pale); color:#2e5c15; }
+.b-gray { background:rgba(43,108,176,0.08); color:var(--ink-muted); }
+
+/* MODULE HEADER */
+.mod-header { display:flex; align-items:center; gap:1.25rem; margin-bottom:1.75rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border); }
+.mod-icon { width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; }
+.mod-title { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:var(--blue-hero); }
+.mod-sub { font-size:12px; font-weight:500; color:var(--ink-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px; }
+.subsec { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-muted); margin:2.25rem 0 1rem; }
+
+/* MODULES NAV */
+.mods-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:1rem; margin:1.75rem 0; }
+.mod-nav {
+  background:var(--blue-card); border:1px solid var(--border-card);
+  border-radius:var(--radius); padding:1.1rem; cursor:pointer;
+  text-decoration:none; color:inherit; transition:all 0.2s; display:block;
+}
+.mod-nav:hover { border-color:var(--sky-200); box-shadow:var(--shadow); transform:translateY(-2px); }
+.mod-nav .ic { font-size:22px; margin-bottom:0.5rem; }
+.mod-nav h4 { font-size:13.5px; font-weight:600; margin-bottom:0.2rem; color:var(--blue-hero); }
+.mod-nav p { font-size:11.5px; color:var(--ink-muted); line-height:1.4; }
+
+/* ALERT */
+.alert { border-radius:var(--radius-sm); padding:1rem 1.4rem; margin:1.25rem 0; font-size:14px; line-height:1.7; }
+.alert-amber { background:var(--gold-pale); border:1px solid #e8c872; color:#5a3d0a; }
+.alert-amber strong { color:#3d2707; }
+.alert-red { background:#fbe9e4; border:1px solid #f5c4b3; color:#7a2c12; }
+.alert-red strong { color:#5a1f0c; font-weight:600; }
+.alert-blue { background:var(--sky-50); border:1px solid var(--sky-100); color:var(--sky-800); }
+.alert-blue strong { color:var(--sky-800); }
+.alert-teal { background:var(--teal-pale); border:1px solid var(--teal-light); color:#145a4e; }
+
+/* IMAGE GALLERY */
+.img-hero { width:100%; border-radius:var(--radius); object-fit:cover; display:block; }
+.img-card { border-radius:var(--radius-sm); overflow:hidden; background:var(--blue-card); border:1px solid var(--border-card); }
+.img-card img { width:100%; display:block; object-fit:cover; }
+.img-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin:2rem 0; }
+
+/* PSY CARDS */
+.psy-card { background:var(--blue-card); border:1px solid var(--border-card); border-radius:var(--radius); padding:1.5rem; margin-bottom:1rem; }
+.psy-card h3 { font-family:'Playfair Display',serif; font-size:1.1rem; margin-bottom:0.65rem; color:var(--teal); }
+.psy-card p { font-size:14.5px; color:var(--ink-soft); line-height:1.75; }
+.psy-tag { display:inline-block; font-size:11px; padding:2px 10px; border-radius:20px; margin-bottom:0.5rem; font-weight:500; }
+.tag-green { background:var(--teal-pale); color:#145a4e; }
+.tag-amber { background:var(--gold-pale); color:#6b530f; }
+.tag-red { background:#fdecea; color:#7a1f0e; }
+
+/* THOUGHT ROW */
+.thought-row { background:rgba(43,108,176,0.06); border-radius:var(--radius-sm); padding:0.85rem 1rem; margin-bottom:0.6rem; font-size:14px; color:var(--ink-soft); }
+.t-label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-muted); margin-bottom:0.2rem; }
+
+/* MED */
+.med-sec { background:var(--blue-card); border:1px solid var(--border-card); border-radius:var(--radius); margin-bottom:1.5rem; overflow:hidden; }
+.med-h { padding:1.1rem 1.5rem; background:rgba(43,108,176,0.08); display:flex; align-items:center; gap:1rem; border-bottom:1px solid var(--border); }
+.med-h h3 { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:600; color:var(--blue-hero); }
+.med-body { padding:1.5rem; }
+.med-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem; }
+.med-item { background:rgba(43,108,176,0.05); border-radius:var(--radius-sm); padding:1rem; }
+.med-item h4 { font-size:14px; font-weight:600; color:var(--teal); margin-bottom:0.3rem; }
+.med-item .dci { font-size:12px; color:var(--ink-muted); margin-bottom:0.5rem; font-style:italic; }
+.med-item p { font-size:13px; color:var(--ink-soft); line-height:1.6; }
+
+/* CONTACT */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-top:1.75rem; }
+.contact-card { background:var(--blue-card); border:1px solid var(--border-card); border-radius:var(--radius); padding:1.75rem; }
+.contact-card h4 { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-muted); margin-bottom:1rem; }
+.contact-item { display:flex; align-items:flex-start; gap:10px; margin-bottom:0.75rem; font-size:14.5px; color:var(--ink-soft); line-height:1.6; }
+
+/* TEST CARD */
+.test-card { background:var(--blue-card); border:1px solid var(--border-card); border-radius:var(--radius); padding:1.4rem; margin-bottom:1rem; display:flex; align-items:center; gap:1.2rem; }
+.test-icon { width:50px; height:50px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+.test-card h3 { font-size:15px; font-weight:600; margin-bottom:0.3rem; color:var(--blue-hero); }
+.test-card p { font-size:13.5px; color:var(--ink-muted); line-height:1.55; }
+.test-card a { display:inline-block; margin-top:0.65rem; font-size:13px; color:var(--teal); font-weight:500; text-decoration:none; border-bottom:1px solid var(--teal-light); padding-bottom:1px; }
+
+/* BOOK */
+.book-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:1.2rem; margin-top:1.5rem; }
+.book-card { background:var(--blue-card); border:1px solid var(--border-card); border-radius:var(--radius); overflow:hidden; }
+.book-cover { width:100%; height:110px; object-fit:cover; display:block; }
+.book-cover-placeholder { height:100px; display:flex; align-items:center; justify-content:center; font-size:32px; }
+.book-info { padding:1rem; }
+.book-info h4 { font-size:13.5px; font-weight:600; margin-bottom:0.2rem; line-height:1.4; color:var(--blue-hero); }
+.book-info .author { font-size:12px; color:var(--ink-muted); margin-bottom:0.4rem; }
+.book-info p { font-size:12.5px; color:var(--ink-soft); line-height:1.5; }
+
+/* RESOURCES */
+.res-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:1rem; margin-top:1.5rem; }
+.res-card { background:var(--blue-card); border:1px solid var(--border-card); border-radius:var(--radius); padding:1.2rem; }
+.res-card .flag { font-size:18px; margin-bottom:0.5rem; }
+.res-card h4 { font-size:14px; font-weight:600; margin-bottom:0.3rem; color:var(--blue-hero); }
+.res-card p { font-size:12.5px; color:var(--ink-muted); line-height:1.5; }
+.res-card a { font-size:12px; color:var(--teal); text-decoration:none; }
+
+/* PAGE HERO BANNER */
+.page-banner {
+  color:white; padding:3.5rem 2rem 3rem;
+  position:relative; overflow:hidden;
+}
+.page-banner .wrap { position:relative; z-index:1; }
+.page-banner h1 { font-family:'Playfair Display',serif; font-size:clamp(1.7rem,4vw,2.6rem); font-weight:700; margin-bottom:0.75rem; }
+.page-banner p { font-size:15px; opacity:0.78; max-width:500px; font-weight:300; }
+.page-banner .note { background:rgba(255,255,255,0.1); border-radius:6px; padding:8px 14px; font-size:12.5px; margin-top:1.2rem; display:inline-block; opacity:0.85; }
+
+/* FOOTER */
+footer { background:var(--blue-hero); color:rgba(255,255,255,0.6); padding:2.5rem 2rem 1.75rem; margin-top:3rem; }
+.footer-inner { max-width:880px; margin:0 auto; }
+.footer-top { display:grid; grid-template-columns:2fr 1fr 1fr; gap:2.5rem; padding-bottom:1.75rem; border-bottom:1px solid rgba(255,255,255,0.1); margin-bottom:1.25rem; }
+.footer-brand { font-family:'Playfair Display',serif; font-size:17px; font-weight:500; color:white; margin-bottom:0.6rem; }
+.footer-desc { font-size:13px; line-height:1.7; }
+.footer-col h5 { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.09em; color:rgba(255,255,255,0.35); margin-bottom:0.85rem; }
+.footer-col a,.footer-col p { display:block; font-size:13px; color:rgba(255,255,255,0.6); text-decoration:none; margin-bottom:0.45rem; cursor:pointer; transition:color 0.15s; }
+.footer-col a:hover { color:white; }
+.footer-bottom { display:flex; justify-content:space-between; align-items:center; font-size:12px; gap:1rem; flex-wrap:wrap; }
+.footer-nums { display:flex; gap:0.75rem; }
+.footer-num { background:rgba(255,255,255,0.08); border-radius:6px; padding:5px 11px; font-size:12.5px; color:rgba(255,255,255,0.75); }
+.footer-num strong { color:white; }
+
+@media(max-width:700px){
+  nav { padding:0 1rem; gap:1rem; }
+  .hero-layout { grid-template-columns:1fr; }
+  .hero-img-wrap { display:none; }
+  .info-grid,.contact-grid { grid-template-columns:1fr; }
+  .footer-top { grid-template-columns:1fr; gap:1.5rem; }
+  .med-grid { grid-template-columns:1fr; }
+  .img-grid { grid-template-columns:1fr 1fr; }
+}
+
+/* IMAGE URLS from wixstatic */
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" onclick="showPage('accueil')">Dr <span>Jurion-Daclin</span></a>
+  <div class="nav-links">
+    <a class="nav-link active" onclick="showPage('accueil')">Accueil</a>
+    <a class="nav-link" onclick="showPage('cabinet')">Cabinet</a>
+    <a class="nav-link" onclick="showPage('psy')">Les "psy"</a>
+    <a class="nav-link" onclick="showPage('anxiete')">Auto-soins anxiété</a>
+    <a class="nav-link" onclick="showPage('depression')">Auto-soins dépression</a>
+    <a class="nav-link" onclick="showPage('sommeil')">Auto-soins sommeil</a>
+    <a class="nav-link" onclick="showPage('bipolaire')">Trouble bipolaire</a>
+    <a class="nav-link" onclick="showPage('medicaments')">Médicaments</a>
+    <a class="nav-link" onclick="showPage('tests')">Tests</a>
+    <a class="nav-link" onclick="showPage('biblio')">Bibliothérapie</a>
+    <a class="nav-link" onclick="showPage('liens')">Liens utiles</a>
+  </div>
+</nav>
+
+<!-- ====================================================== ACCUEIL -->
+<div id="page-accueil" class="page active">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">🏥 Psychiatre — Secteur 1 — Claira / Perpignan</div>
+      <div class="hero-layout">
+        <div>
+          <h1>Dr Valérie<br><em>Jurion-Daclin</em></h1>
+          <p class="hero-sub">Psychiatre à Claira, spécialisée dans la prise en charge des troubles anxieux, dépressifs, bipolaires et de l'humeur.</p>
+          <div class="hero-contacts">
+            <div class="hero-contact-item">📍 <span><strong>49 bd des Albères</strong> — 66530 Claira</span></div>
+            <div class="hero-contact-item">📞 <span><strong>07 68 91 25 31</strong></span></div>
+            <div class="hero-contact-item">💳 <span><strong>Secteur 1</strong> — Remboursement optimal</span></div>
+            <div class="hero-contact-item">✉️ <span>jurion.valerie@gmail.com</span></div>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" onclick="showPage('anxiete')">📚 Ressources patients</a>
+            <a class="btn btn-outline" onclick="showPage('tests')">🧪 Tests d'auto-évaluation</a>
+          </div>
+        </div>
+        <div class="hero-img-wrap">
+          <img src="https://static.wixstatic.com/media/826562_905054ba9afe4e51adde36f5a0e9bd0c~mv2_d_3508_2480_s_4_2.jpg/v1/crop/x_164,y_117,w_3344,h_2246/fill/w_500,h_340,al_c,q_85,enc_avif,quality_auto/826562_905054ba9afe4e51adde36f5a0e9bd0c~mv2_d_3508_2480_s_4_2.jpg" alt="Cabinet Dr Jurion-Daclin">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="sec-label">Pathologies prises en charge</div>
+    <h2 class="sec-title">Votre psychiatre pour tous les troubles de la santé mentale</h2>
+
+    <div class="img-grid">
+      <div class="img-card">
+        <img src="https://static.wixstatic.com/media/826562_38947c4499f1470c854d0f536ff0dd46~mv2.jpg/v1/fill/w_400,h_270,al_c,q_85,enc_avif,quality_auto/826562_38947c4499f1470c854d0f536ff0dd46~mv2.jpg" alt="Troubles dépressifs" style="height:170px; width:100%; object-fit:cover;">
+        <div style="padding:1rem;">
+          <h4 style="font-size:14px; font-weight:600; color:var(--blue-hero); margin-bottom:0.35rem;">Troubles dépressifs</h4>
+          <p style="font-size:13px; color:var(--ink-muted);">Plus de 3 millions de personnes en France. Une maladie qui se soigne.</p>
+        </div>
+      </div>
+      <div class="img-card">
+        <img src="https://static.wixstatic.com/media/474b2e3497d64cae9db40dbe76e1fa6c.jpg/v1/fill/w_400,h_270,al_c,q_85,enc_avif,quality_auto/474b2e3497d64cae9db40dbe76e1fa6c.jpg" alt="Troubles anxieux" style="height:170px; width:100%; object-fit:cover;">
+        <div style="padding:1rem;">
+          <h4 style="font-size:14px; font-weight:600; color:var(--blue-hero); margin-bottom:0.35rem;">Troubles anxieux</h4>
+          <p style="font-size:13px; color:var(--ink-muted);">TAG, panique, phobie sociale, TOC, PTSD, phobies spécifiques.</p>
+        </div>
+      </div>
+      <div class="img-card">
+        <img src="https://static.wixstatic.com/media/826562_9ffff5427573429681cf45960b73589d~mv2.jpg/v1/fill/w_400,h_270,al_c,q_85,enc_avif,quality_auto/826562_9ffff5427573429681cf45960b73589d~mv2.jpg" alt="Autres pathologies" style="height:170px; width:100%; object-fit:cover;">
+        <div style="padding:1rem;">
+          <h4 style="font-size:14px; font-weight:600; color:var(--blue-hero); margin-bottom:0.35rem;">Autres pathologies</h4>
+          <p style="font-size:13px; color:var(--ink-muted);">Burnout, trouble bipolaire, schizophrénie, troubles du sommeil.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-grid" style="margin-top:1rem;">
+      <div class="card clickable" onclick="showPage('anxiete')">
+        <div class="card-icon" style="background:var(--teal-pale);">🌀</div>
+        <h3>Auto-soins anxiété</h3>
+        <p>7 troubles anxieux avec exercices TCC pratiques.</p>
+      </div>
+      <div class="card clickable" onclick="showPage('depression')">
+        <div class="card-icon" style="background:var(--purple-pale);">🌧</div>
+        <h3>Auto-soins dépression</h3>
+        <p>Activation comportementale, pensées négatives, hygiène de vie.</p>
+      </div>
+      <div class="card clickable" onclick="showPage('sommeil')">
+        <div class="card-icon" style="background:var(--sky-50);">😴</div>
+        <h3>Auto-soins sommeil</h3>
+        <p>TCC-I, hygiène du sommeil, conseils comportementaux.</p>
+      </div>
+      <div class="card clickable" onclick="showPage('bipolaire')">
+        <div class="card-icon" style="background:var(--gold-pale);">🔄</div>
+        <h3>Trouble bipolaire</h3>
+        <p>Psychoéducation, détection précoce, vie quotidienne.</p>
+      </div>
+      <div class="card clickable" onclick="showPage('tests')">
+        <div class="card-icon" style="background:var(--coral-pale);">🧪</div>
+        <h3>Tests d'auto-évaluation</h3>
+        <p>PHQ-9, GAD-7, ISI, MBI, AUDIT, test bipolarité.</p>
+      </div>
+      <div class="card clickable" onclick="showPage('medicaments')">
+        <div class="card-icon" style="background:var(--green-pale);">💊</div>
+        <h3>Fiches médicaments</h3>
+        <p>Antidépresseurs, anxiolytiques, thymorégulateurs, hypnotiques.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">Dr Valérie Jurion-Daclin</div>
+          <p class="footer-desc">Psychiatre conventionnée secteur 1 à Claira (66530). Prise en charge des troubles psychiatriques de l'adulte.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Pages</h5>
+          <a onclick="showPage('cabinet')">Le cabinet</a>
+          <a onclick="showPage('psy')">Les "psy"</a>
+          <a onclick="showPage('anxiete')">Auto-soins anxiété</a>
+          <a onclick="showPage('depression')">Auto-soins dépression</a>
+          <a onclick="showPage('medicaments')">Médicaments</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <p>📍 49 bd des Albères, Claira</p>
+          <p>📞 07 68 91 25 31</p>
+          <p>✉️ jurion.valerie@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 Dr Valérie Jurion-Daclin — Psychiatre</span>
+        <div class="footer-nums">
+          <div class="footer-num">🆘 <strong>3114</strong> Prévention suicide</div>
+          <div class="footer-num">🚑 <strong>15</strong> SAMU</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ====================================================== CABINET -->
+<div id="page-cabinet" class="page">
+  <div class="wrap">
+    <div class="sec-label">Informations pratiques</div>
+    <h1 class="sec-title">Le cabinet</h1>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1.5rem; align-items:start;">
+      <div>
+        <div class="contact-card" style="margin-bottom:1.25rem;">
+          <h4>📍 Adresse & Contact</h4>
+          <div class="contact-item">📍 <span><strong>49 boulevard des Albères</strong><br>66530 Claira</span></div>
+          <div class="contact-item">📞 <span><strong>07 68 91 25 31</strong> — Sur rendez-vous</span></div>
+          <div class="contact-item">✉️ <span>jurion.valerie@gmail.com</span></div>
+        </div>
+        <div class="contact-card">
+          <h4>💳 Secteur & Remboursement</h4>
+          <p style="font-size:14.5px; color:var(--ink-soft); line-height:1.75;">Le Dr Jurion-Daclin est <strong>conventionnée secteur 1</strong>. Dans le cadre du parcours de soins coordonné (adressé par votre médecin traitant), le remboursement est optimal : 70% Assurance Maladie + mutuelle. Les moins de 25 ans bénéficient d'un accès libre et remboursé sans besoin de médecin traitant.</p>
+        </div>
+      </div>
+      <div>
+        <img src="https://static.wixstatic.com/media/826562_48c81af1c1194f46b3bf344b020cd900~mv2.jpg/v1/fill/w_500,h_370,al_c,q_85,enc_avif,quality_auto/826562_48c81af1c1194f46b3bf344b020cd900~mv2.jpg" alt="Cabinet" style="width:100%; border-radius:var(--radius); box-shadow:var(--shadow-lg);">
+      </div>
+    </div>
+
+    <div style="background:var(--blue-card); border:1px solid var(--border-card); border-radius:var(--radius); padding:1.5rem; margin-top:1.5rem; text-align:center;">
+      <p style="font-size:14px; color:var(--ink-muted); margin-bottom:0.5rem;">📍 49 boulevard des Albères — 66530 Claira</p>
+      <a href="https://maps.google.com/?q=49+boulevard+des+Albères+Claira+66530" target="_blank" style="color:var(--teal); font-size:14px; text-decoration:none; font-weight:500;">→ Ouvrir dans Google Maps</a>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================== LES PSY -->
+<div id="page-psy" class="page">
+  <div class="wrap">
+    <div class="sec-label">S'orienter dans le soin</div>
+    <h1 class="sec-title">Les professionnels "psy" : qui fait quoi ?</h1>
+
+    <div style="display:grid; grid-template-columns:2fr 1fr; gap:2rem; align-items:start; margin-bottom:2.5rem; margin-top:1.5rem;">
+      <p class="sec-intro">Il n'est pas toujours facile de s'y retrouver parmi les différents professionnels de la santé mentale. Voici un guide clair pour vous aider à choisir le bon interlocuteur.</p>
+      <img src="https://static.wixstatic.com/media/826562_7489fc2fd4404333817fa760ac95ebd4~mv2.jpg/v1/fill/w_400,h_250,al_c,q_85,enc_avif,quality_auto/826562_7489fc2fd4404333817fa760ac95ebd4~mv2.jpg" alt="Professionnels psy" style="width:100%; border-radius:var(--radius); box-shadow:var(--shadow);">
+    </div>
+
+    <div class="subsec">Professionnels avec formation reconnue et indiscutable</div>
+    <div class="psy-card"><span class="psy-tag tag-green">Formation universitaire — Titre protégé</span><h3>Le psychiatre</h3><p>Le psychiatre est avant tout un <strong>médecin</strong> (10 ans d'études minimum), spécialisé dans les maladies mentales. Il peut prescrire des médicaments, émettre des feuilles de soins et distinguer troubles psychiatriques et maladies physiques. Il est soumis au Code de déontologie médicale, contrôlé par l'Ordre des Médecins.</p></div>
+    <div class="psy-card"><span class="psy-tag tag-green">Formation universitaire — Titre protégé</span><h3>Le psychologue</h3><p>Formation universitaire (master 2 minimum). Propose des thérapies et bilans psychologiques. <strong>Ne prescrit pas</strong> et n'émet pas de feuilles de soins — consultations non remboursées par l'AM (sauf dispositif MonPsy). Pas de formation systématique à détecter les intrications maladies physiques/psychiques.</p></div>
+
+    <div class="subsec">Professionnels avec spécialisation particulière</div>
+    <div class="psy-card"><span class="psy-tag tag-amber">Sur-spécialisation — Vérifier le titre de base</span><h3>Le comportementaliste / TCC</h3><p>Pratique la <strong>Thérapie Cognitivo-Comportementale (TCC)</strong> — traitement de référence pour les troubles anxieux, la dépression, les TOC, les phobies. Quasiment toujours psychiatre ou psychologue à la base (l'AFTCC l'exige pour les formations certifiantes).</p></div>
+    <div class="psy-card"><span class="psy-tag tag-amber">Sur-spécialisation — Vérifier le titre de base</span><h3>Le psychanalyste / analyste</h3><p>Pas nécessairement psychiatre ou psychologue. Formation codifiée par les sociétés de psychanalyse (freudien, lacanien, jungien…). Si le professionnel est aussi psychiatre ou psychologue, c'est un avantage. Sinon, renseignez-vous sur sa formation de base.</p></div>
+    <div class="psy-card"><span class="psy-tag tag-amber">Sur-spécialisation</span><h3>Le thérapeute familial / systémicien</h3><p>Pratique la thérapie systémique ou familiale — particulièrement adaptée aux problèmes relationnels et aux difficultés chez les enfants. Presque toujours psychiatre ou psychologue à la base.</p></div>
+
+    <div class="subsec">Professionnels dont la qualification est plus floue</div>
+    <div class="psy-card"><span class="psy-tag tag-red">Vigilance — Vérifier les titres</span><h3>Le "psychothérapeute" sans autre précision</h3><p>Depuis le décret du 22/05/2010, seuls les psychiatres et psychologues cliniciens sont détenteurs de plein droit du titre de psychothérapeute. <strong>Si un professionnel s'intitule uniquement "psychothérapeute" sans préciser psychiatre ou psychologue, renseignez-vous.</strong> Consultez le registre de l'ARS ou l'association Psychothérapies Vigilance (psyvig.com).</p></div>
+    <div class="psy-card"><span class="psy-tag tag-red">Vigilance — Titre non réglementé</span><h3>Le coach / "thérapeute"</h3><p>Titre non protégé par la loi. Les dénominations suivantes ne correspondent à aucune formation solidement reconnue : <em>psychopraticien, fasciathérapeute, psychosomatologue, réflexologue, thérapeute énergétique</em>. Quand on a des titres reconnus, on les met en avant.</p></div>
+
+    <div class="alert alert-amber" style="margin-top:1.5rem;">
+      <strong>Règle d'or :</strong> Demandez toujours au professionnel quel est son titre officiel et comment il a été obtenu. Vérifiez qu'il est psychiatre ou psychologue, puis regardez ses éventuelles sur-spécialisations. Un professionnel sérieux vous répondra volontiers.
+    </div>
+
+    <img src="https://static.wixstatic.com/media/826562_6be82a4c4c5c47a5b313ce062293c289~mv2.jpg/v1/fill/w_800,h_380,al_c,q_85,enc_avif,quality_auto/826562_6be82a4c4c5c47a5b313ce062293c289~mv2.jpg" alt="Professionnels santé mentale" style="width:100%; border-radius:var(--radius); margin-top:2rem; box-shadow:var(--shadow);">
+  </div>
+</div>
+
+<!-- ====================================================== AUTO-SOINS ANXIÉTÉ -->
+<div id="page-anxiete" class="page">
+  <div class="page-banner" style="background:linear-gradient(150deg,#0f5a48 0%,#083d30 100%);">
+    <div class="wrap" style="padding-top:0; padding-bottom:0;">
+      <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; opacity:0.65; margin-bottom:0.85rem;">Ressource TCC — Données probantes</div>
+      <h1>Prendre soin de soi face à l'anxiété</h1>
+      <p>Exercices pratiques pour tous les troubles anxieux — issus de la TCC validée.</p>
+      <div class="note">⚠ Complément à un suivi médical — pas un substitut.</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="mods-grid">
+      <a class="mod-nav" href="#a-tag"><div class="ic">🌀</div><h4>Anxiété généralisée</h4><p>TAG — Inquiétudes</p></a>
+      <a class="mod-nav" href="#a-panique"><div class="ic">⚡</div><h4>Trouble panique</h4><p>Crises de panique</p></a>
+      <a class="mod-nav" href="#a-social"><div class="ic">👥</div><h4>Anxiété sociale</h4><p>Peur du jugement</p></a>
+      <a class="mod-nav" href="#a-toc"><div class="ic">🔁</div><h4>TOC</h4><p>Obsessions</p></a>
+      <a class="mod-nav" href="#a-ptsd"><div class="ic">🛡</div><h4>PTSD</h4><p>Trauma</p></a>
+      <a class="mod-nav" href="#a-sante"><div class="ic">🩺</div><h4>Anxiété de santé</h4><p>Hypocondrie</p></a>
+      <a class="mod-nav" href="#a-phobie"><div class="ic">🎯</div><h4>Phobies spécifiques</h4><p>Peurs ciblées</p></a>
+    </div>
+
+    <!-- TAG -->
+    <div id="a-tag" style="scroll-margin-top:74px;">
+      <div class="mod-header">
+        <div class="mod-icon" style="background:var(--teal-pale);">🌀</div>
+        <div><div class="mod-sub">Trouble anxieux généralisé</div><div class="mod-title">Anxiété généralisée</div></div>
+      </div>
+      <div class="alert alert-teal">Inquiétudes persistantes, excessives et difficiles à contrôler concernant de nombreux domaines (santé, travail, famille, avenir), avec tension musculaire, fatigue et troubles du sommeil.</div>
+      <div class="subsec">Exercices pratiques</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-teal">Technique clé</span><span class="acc-title">Le temps de l'inquiétude (worry time)</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">1. Choisissez chaque jour la même plage de 20 min (ex. 17h). Pas près du coucher.<br>2. Quand une inquiétude surgit, notez-la et dites : <em>"Je m'en occupe à 17h."</em><br>3. À 17h, traitez la liste — cherchez des solutions concrètes si possible.<br>4. À 17h20, fermez la liste.</div><div class="hl-box hl-teal" style="margin-top:1rem;"><span class="hl-label">Pourquoi ça marche</span>Le cerveau apprend que les inquiétudes peuvent attendre — leur fréquence spontanée diminue progressivement.</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-teal">Restructuration</span><span class="acc-title">Inquiétude productive vs non productive</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box"><strong>La question clé :</strong> <em>"Puis-je agir concrètement maintenant ?"</em><br><br>— <strong>Oui</strong> → faites-le ou planifiez-le précisément.<br>— <strong>Non</strong> → c'est une inquiétude non productive (hypothétique, futur, incontrôlable). Pratiquez la tolérance à l'incertitude.</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-teal">Tolérance</span><span class="acc-title">S'entraîner à tolérer l'incertitude</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">Chaque jour, un petit acte d'incertitude intentionnel :<br>— Commander sans hésiter longtemps<br>— Envoyer un message sans le relire trois fois<br>— Prendre une décision sans chercher à confirmer sur internet<br>— Laisser une situation en suspens sans appeler pour se rassurer<br><br>Notez ce qui s'est passé. L'incertitude était-elle aussi catastrophique qu'anticipé ?</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gray">Relaxation</span><span class="acc-title">Respiration diaphragmatique 4-6</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">— Inspirez par le nez (ventre qui gonfle) : <strong>4 secondes</strong><br>— Expirez lentement par la bouche : <strong>6 secondes</strong><br>— 10 cycles, 2 à 3 fois par jour — pas seulement en crise.<br><br><em>La pratique quotidienne régulière est plus efficace que l'usage uniquement en urgence.</em></div></div></div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <!-- PANIQUE -->
+    <div id="a-panique" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--sky-50);">⚡</div><div><div class="mod-sub">Trouble panique / Agoraphobie</div><div class="mod-title">Trouble panique</div></div></div>
+      <div class="alert alert-teal">Montée brutale d'anxiété intense avec symptômes physiques forts (palpitations, essoufflement, vertiges) et peur de mourir ou de perdre le contrôle. Le trouble se caractérise surtout par la <strong>peur des crises elles-mêmes</strong>.</div>
+      <div class="subsec">Exercices pratiques</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">En crise</span><span class="acc-title">Ancrage sensoriel 5-4-3-2-1</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">👁 <strong>5 choses</strong> que vous voyez<br>✋ <strong>4 choses</strong> que vous touchez (touchez-les)<br>👂 <strong>3 choses</strong> que vous entendez<br>👃 <strong>2 choses</strong> que vous sentez<br>👅 <strong>1 chose</strong> que vous goûtez<br><br>Puis : <em>"C'est une crise de panique. Désagréable mais pas dangereux. Ça passe en 10–20 min."</em></div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">Restructuration</span><span class="acc-title">Contester les interprétations catastrophiques</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">1. <em>"Quelle est mon interprétation ?"</em> (ex. "Mon cœur bat vite = infarctus")<br>2. <em>"Quelle est l'explication la plus probable ?"</em> (réponse normale à l'anxiété)<br>3. <em>"Qu'est-il arrivé lors de mes crises précédentes ?"</em> (elles ont toutes fini, sans danger)<br>4. <em>"Quelle preuve réelle ai-je d'un danger ?"</em></div><div class="hl-box hl-blue" style="margin-top:1rem;"><span class="hl-label">À retenir</span>Les sensations physiques de la panique sont réelles — leur interprétation catastrophique est une erreur. Votre cœur qui s'emballe prépare votre corps à fuir, ce n'est pas un danger cardiaque.</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">Exposition</span><span class="acc-title">Hiérarchie d'exposition aux situations évitées</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">1. Listez toutes les situations évitées depuis les crises<br>2. Cotez-les de 0 à 100 (anxiété estimée)<br>3. Commencez par la situation cotée 30–40<br>4. Restez dans la situation jusqu'à ce que l'anxiété baisse de 50% — ne fuyez pas<br>5. Répétez jusqu'à habituation, puis passez au niveau suivant</div></div></div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <!-- SOCIAL -->
+    <div id="a-social" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--coral-pale);">👥</div><div><div class="mod-sub">Phobie sociale</div><div class="mod-title">Anxiété sociale</div></div></div>
+      <div class="alert alert-teal">Peur intense d'être observé, jugé négativement ou humilié en situation sociale. L'évitement, qui soulage à court terme, maintient et renforce l'anxiété.</div>
+      <div class="subsec">Exercices pratiques</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-coral">Technique clé</span><span class="acc-title">Déplacer l'attention : de soi vers l'extérieur</span><span class="acc-arrow">▼</span></div><div class="acc-body"><p>L'anxiété sociale pousse à se focaliser sur soi (rougeurs, voix, mots). En situation sociale, dirigez intentionnellement votre attention vers ce que dit vraiment l'autre, l'environnement, la question posée — pas à la façon dont vous allez répondre.</p></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-coral">Exposition</span><span class="acc-title">Exposition progressive sans comportements de sécurité</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box"><strong>Exemples de progression :</strong><br>— Commander au comptoir d'un café (20/100)<br>— Poser une question en public (40/100)<br>— Prendre la parole en réunion (60/100)<br>— Faire une présentation devant un groupe (80/100)<br><br>Exposez-vous sans les comportements de sécurité (chuchoter, éviter le regard, préparer ses phrases à l'avance).</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-coral">Cognition</span><span class="acc-title">Tester ses prédictions négatives</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box"><strong>Avant :</strong> Notez votre prédiction précise + niveau de conviction (0–100%)<br><strong>Après :</strong> Que s'est-il réellement passé ? Les autres y ont-ils accordé autant d'importance que vous le croyiez ?</div></div></div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <!-- TOC -->
+    <div id="a-toc" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--purple-pale);">🔁</div><div><div class="mod-sub">Trouble obsessionnel compulsif</div><div class="mod-title">TOC</div></div></div>
+      <div class="alert alert-teal">Obsessions (pensées intrusives anxiogènes) + compulsions (rituels pour réduire l'anxiété). Les compulsions soulagent à court terme mais renforcent le TOC à long terme.</div>
+      <div class="subsec">Exercices pratiques</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-purple">Traitement de référence</span><span class="acc-title">Exposition avec Prévention de la Réponse (EPR)</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">1. Listez obsessions et compulsions associées<br>2. Construisez une hiérarchie (0–100 d'anxiété)<br>3. Exposez-vous au déclencheur coté ~30/100<br>4. Résistez à la compulsion — notez l'anxiété toutes les 5 min<br>5. Attendez : l'anxiété monte puis redescend spontanément (20–45 min)<br>6. Ne faites pas la compulsion même si l'anxiété reste haute</div><div class="hl-box hl-gold" style="margin-top:1rem;"><span class="hl-label">Principe fondamental</span>L'anxiété est temporaire. Elle monte, atteint un pic, puis redescend — même sans compulsion. Chaque résistance affaiblit le TOC.</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-purple">Psychoéducation</span><span class="acc-title">Comprendre la nature des pensées obsessionnelles</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="hl-box hl-gold"><strong>La majorité des personnes ont des pensées intrusives</strong> (violentes, sexuelles, blasphématoires). Ce qui différencie le TOC, c'est la signification accordée à ces pensées et les efforts pour les neutraliser. Une pensée n'est pas un désir, ni une intention, ni un reflet de votre caractère.</div><div class="step-box" style="margin-top:1rem;"><strong>Exercice de défusion :</strong> Formulez : <em>"J'ai la pensée que… [contenu]"</em> plutôt que de la vivre comme une réalité.</div></div></div>
+      <div class="alert alert-amber">Le TOC nécessite presque toujours un accompagnement professionnel formé à l'EPR. Ces exercices complètent une thérapie mais ne la remplacent pas si les rituels durent plus d'une heure par jour.</div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <!-- PTSD -->
+    <div id="a-ptsd" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--gold-pale);">🛡</div><div><div class="mod-sub">État de stress post-traumatique</div><div class="mod-title">PTSD / Trauma</div></div></div>
+      <div class="alert alert-amber"><strong>Note :</strong> Les exercices suivants sont des techniques de stabilisation sûres en auto-soins. Le traitement du trauma (EMDR, exposition prolongée) nécessite un professionnel spécialisé.</div>
+      <div class="subsec">Exercices de stabilisation</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">En crise</span><span class="acc-title">Ancrage TIPP en cas de flashback</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box"><strong>T — Toucher :</strong> Tenez un objet froid, sentez sa texture. Pieds au sol.<br><strong>I — Ici et maintenant :</strong> <em>"Je suis dans [lieu], on est [jour]. Je suis en sécurité."</em><br><strong>P — Présent sensoriel :</strong> Nommez 5 choses visibles et décrivez-les.<br><strong>P — Posture :</strong> Redressez-vous. Inspirez profondément 3 fois.</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Ressource</span><span class="acc-title">Lieu sûr imaginaire</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">1. Imaginez un lieu où vous vous sentez absolument en sécurité<br>2. Explorez-le avec tous vos sens<br>3. Choisissez un mot ou un geste qui représente ce lieu<br>4. Pratiquez plusieurs fois par semaine pour l'ancrer<br>5. En crise : prononcez votre mot ou faites votre geste</div></div></div>
+      <div class="alert alert-amber">EMDR, CPT et exposition prolongée sont très efficaces pour le PTSD. Consultez votre médecin pour une orientation vers un thérapeute spécialisé.</div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <!-- SANTÉ -->
+    <div id="a-sante" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--green-pale);">🩺</div><div><div class="mod-sub">Hypocondrie / Cyberchondrie</div><div class="mod-title">Anxiété de santé</div></div></div>
+      <div class="alert alert-teal">Préoccupation excessive d'avoir ou de développer une maladie grave. Les comportements de réassurance (recherches internet, consultations répétées) maintiennent et aggravent le problème.</div>
+      <div class="subsec">Exercices pratiques</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-green">Technique clé</span><span class="acc-title">Réduire les comportements de réassurance</span><span class="acc-arrow">▼</span></div><div class="acc-body"><ul><li>Recherches sur internet (symptômes, maladies)</li><li>Consultations répétées pour la même plainte</li><li>Vérifications corporelles répétées</li><li>Demander aux proches de vous rassurer</li></ul><div class="step-box" style="margin-top:1rem;">Commencez par le comportement le moins difficile à réduire. Fixez un objectif concret cette semaine. Tolérez l'inconfort — il s'atténuera.</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-green">Cognition</span><span class="acc-title">Réévaluer les probabilités réelles</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">1. <em>"Quelle est ma peur précise ?"</em><br>2. <em>"Combien de fois ai-je eu ce symptôme et c'était vraiment grave ?"</em><br>3. <em>"Quelles sont les causes les plus courantes de ce symptôme ?"</em> (souvent bénignes à 99%+)<br>4. <em>"Si un ami avait ce symptôme, qu'est-ce que je penserais ?"</em></div></div></div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <!-- PHOBIES -->
+    <div id="a-phobie" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:#FBEAF0;">🎯</div><div><div class="mod-sub">Phobie spécifique / simple</div><div class="mod-title">Phobies spécifiques</div></div></div>
+      <div class="alert alert-teal">L'exposition progressive est le traitement de référence des phobies spécifiques — taux de guérison 80–90%. Ce que le cerveau apprend par l'expérience directe, il ne peut pas l'apprendre autrement.</div>
+      <div class="subsec">Exercices pratiques</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gray">Étape 1</span><span class="acc-title">Construire sa hiérarchie d'exposition</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box"><strong>Exemple phobie des araignées :</strong><br>10 : Penser au mot "araignée" · 30 : Photo nette · 50 : Bocal dans la même pièce · 75 : À 30 cm libre · 95 : Sur la main<br><br>Construisez votre liste avec 8 à 12 niveaux pour votre phobie spécifique.</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gray">Étape 2</span><span class="acc-title">Réaliser l'exposition graduée</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">1. Commencez par le niveau ~20/100<br>2. Restez jusqu'à ce que l'anxiété baisse de 50% — ne fuyez pas<br>3. Répétez jusqu'à habituation (≤20/100)<br>4. Passez au niveau suivant<br>5. Pas de comportements de sécurité</div><div class="hl-box hl-teal" style="margin-top:1rem;"><span class="hl-label">L'anxiété est votre alliée</span>Ressentir de l'anxiété pendant l'exposition est normal et nécessaire. C'est le signe que l'apprentissage a lieu.</div></div></div>
+      <div class="alert alert-blue"><strong>Bonne nouvelle :</strong> Les phobies spécifiques sont les troubles anxieux les plus rapides à traiter. Parfois une séance intensive de 3 heures suffit à produire des résultats durables.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================== AUTO-SOINS DÉPRESSION -->
+<div id="page-depression" class="page">
+  <div class="page-banner" style="background:linear-gradient(150deg,#3D3DB0 0%,#27277A 100%);">
+    <div class="wrap" style="padding-top:0; padding-bottom:0;">
+      <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; opacity:0.65; margin-bottom:0.85rem;">Ressource TCC — Données probantes</div>
+      <h1>Traverser la dépression : reprendre pied</h1>
+      <p>Activation comportementale, TCC, hygiène de vie — validés par la recherche.</p>
+      <div class="note">🆘 Pensées suicidaires → appelez le <strong>3114</strong> (gratuit, 24h/24)</div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="alert alert-red"><strong>Pensées de mort ou de suicide :</strong> appelez le <strong>3114</strong> (gratuit, 24h/24, 7j/7) ou rendez-vous aux urgences.</div>
+    <div class="mods-grid">
+      <a class="mod-nav" href="#d-activation"><div class="ic">🚶</div><h4>Activation comportementale</h4><p>Traitement de 1ère ligne</p></a>
+      <a class="mod-nav" href="#d-pensees"><div class="ic">💭</div><h4>Pensées négatives</h4><p>Restructuration TCC</p></a>
+      <a class="mod-nav" href="#d-hygiene"><div class="ic">🌿</div><h4>Hygiène de vie</h4><p>Exercice, sommeil</p></a>
+      <a class="mod-nav" href="#d-social"><div class="ic">🤝</div><h4>Vie sociale</h4><p>Isolement</p></a>
+      <a class="mod-nav" href="#d-rechute"><div class="ic">🛡</div><h4>Prévention rechutes</h4><p>Signaux d'alarme</p></a>
+    </div>
+
+    <div id="d-activation" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--purple-pale);">🚶</div><div><div class="mod-sub">Module 1 — Traitement de première ligne</div><div class="mod-title">Activation comportementale</div></div></div>
+      <div class="alert alert-teal">Principe clé : <strong>on n'attend pas d'avoir envie pour agir — on agit pour retrouver l'envie.</strong> Dans la dépression, la motivation suit l'action.</div>
+      <div class="subsec">Exercices pratiques</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Étape 1</span><span class="acc-title">Monitorer ses activités et son humeur</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">Pour chaque tranche de 2–3 heures, notez :<br>— Ce que vous avez fait<br>— Humeur de 0 à 10 / Plaisir de 0 à 10 / Accomplissement de 0 à 10<br><br>Cherchez : quelles activités, même petites, améliorent légèrement l'humeur ?</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Étape 2 — Clé</span><span class="acc-title">La règle des petits pas</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box"><strong>1. Commencer très petit.</strong> L'objectif n'est pas "aller courir 30 min" mais "sortir 5 minutes".<br><strong>2. Planifier à l'avance.</strong> Décidez ce soir ce que vous ferez demain.<br><strong>3. Agir sans attendre d'en avoir envie.</strong> L'envie vient après l'action.<br><strong>4. Valoriser chaque accomplissement.</strong> Comparez avec hier, pas avec avant la dépression.</div><div class="hl-box hl-gold" style="margin-top:1rem;"><span class="hl-label">Progression type sur 3 semaines</span><strong>S1 :</strong> Lever à heure fixe + 5 min dehors + un repas cuisiné<br><strong>S2 :</strong> Une activité de plaisir + contact social<br><strong>S3 :</strong> 15 min de marche + reprendre une activité abandonnée</div></div></div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <div id="d-pensees" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--teal-pale);">💭</div><div><div class="mod-sub">Module 2 — Thérapie cognitive</div><div class="mod-title">Travailler sur les pensées négatives</div></div></div>
+      <div class="alert alert-teal">La triade de Beck : vision négative de soi (<em>"Je suis nul"</em>), du monde (<em>"Tout va mal"</em>), de l'avenir (<em>"Ça ne s'améliorera jamais"</em>). Ce sont des distorsions que la TCC apprend à modifier.</div>
+      <div class="subsec">Exercices pratiques</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-teal">Identification</span><span class="acc-title">Reconnaître les distorsions cognitives</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <div class="thought-row"><div class="t-label">Pensée tout-ou-rien</div><em>"Si ce n'est pas parfait, c'est un échec total."</em></div>
+        <div class="thought-row"><div class="t-label">Catastrophisme</div><em>"Ça va forcément mal se passer."</em></div>
+        <div class="thought-row"><div class="t-label">Filtre négatif</div><em>"Tout s'est bien passé… sauf une chose. C'était nul."</em></div>
+        <div class="thought-row"><div class="t-label">Disqualification du positif</div><em>"Si j'ai réussi, c'est de la chance."</em></div>
+        <div class="thought-row"><div class="t-label">Surgénéralisation</div><em>"Cette chose a mal tourné → Ma vie entière est un échec."</em></div>
+        <div class="thought-row"><div class="t-label">"Je devrais"</div><em>"Je devrais être capable de m'en sortir seul."</em></div>
+      </div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-teal">Technique clé</span><span class="acc-title">La fiche de pensée en 5 colonnes</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <div class="thought-row"><div class="t-label">1. Situation déclenchante</div>Faits objectifs. Où, quand, qui, quoi.</div>
+        <div class="thought-row"><div class="t-label">2. Pensée automatique</div>Mot pour mot. Croyance 0–100%.</div>
+        <div class="thought-row"><div class="t-label">3. Émotion</div>Quelle émotion ? Intensité 0–100%.</div>
+        <div class="thought-row"><div class="t-label">4. Pensée alternative</div>Vision plus réaliste — faits pour et contre ?</div>
+        <div class="thought-row"><div class="t-label">5. Résultat</div>Croyance dans la pensée initiale après réflexion ? Émotion après ?</div>
+        <div class="step-box" style="margin-top:1rem;"><strong>Questions pour trouver la pensée alternative :</strong><br>— Quels faits vont contre cette pensée ?<br>— Si un ami me disait la même chose, que lui répondrais-je ?<br>— Dans 5 ans, comment verrai-je cette situation ?</div>
+      </div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-teal">Rumination</span><span class="acc-title">Interrompre la rumination dépressive</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">1. <strong>Remarquer</strong> que vous ruminez (sans vous juger)<br>2. <strong>Nommer :</strong> "C'est de la rumination, pas de la résolution de problème"<br>3. <strong>Rediriger</strong> vers une activité concrète et engageante<br>4. Observer les pensées comme des nuages qui passent</div><div class="hl-box hl-teal" style="margin-top:1rem;">Analyser sa dépression des heures n'est pas de la thérapie. Le changement vient de l'action, pas de la réflexion seule.</div></div></div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <div id="d-hygiene" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--sky-50);">🌿</div><div><div class="mod-sub">Module 3 — Bases biologiques</div><div class="mod-title">Hygiène de vie et dépression</div></div></div>
+      <div class="subsec">Exercices pratiques</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">Priorité 1</span><span class="acc-title">Exercice physique : aussi efficace qu'un antidépresseur</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box"><strong>Validé :</strong> Exercice aérobie (marche rapide, vélo, natation) — 30 min — 3 à 5 fois/semaine<br><br><strong>Démarrer progressivement :</strong><br>S1 : 10 min de marche/jour (priorité à la régularité)<br>S2–3 : 15–20 min<br>S4+ : 30 min<br><br><em>Marcher dehors le matin (lumière naturelle) est encore plus efficace.</em></div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">Priorité 2</span><span class="acc-title">Régulariser le sommeil</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box"><strong>Règle la plus importante :</strong> Lever à heure fixe chaque jour, même le week-end.<br>+ Lumière naturelle dans les 30 min suivant le lever.<br>+ Pas de sieste longue (max 20 min avant 15h).<br>+ Limiter alcool et écrans le soir.</div></div></div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <div id="d-social" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--teal-pale);">🤝</div><div><div class="mod-sub">Module 4 — Lien social</div><div class="mod-title">Maintenir les relations sociales</div></div></div>
+      <div class="alert alert-teal">La dépression pousse à l'isolement — et l'isolement aggrave la dépression. Maintenir un contact humain quotidien, aussi simple soit-il, est un acte thérapeutique.</div>
+      <div class="subsec">Exercices pratiques</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-teal">Quotidien</span><span class="acc-title">Un contact social minimal par jour</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box">— Envoyer un message à un proche (une phrase suffit)<br>— Appeler quelqu'un 5 minutes<br>— Dire bonjour à son voisin<br>— Commander dans un café<br>— Participer à un échange court en famille</div></div></div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <div id="d-rechute" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--gold-pale);">🛡</div><div><div class="mod-sub">Module 5 — Après la dépression</div><div class="mod-title">Prévention des rechutes</div></div></div>
+      <div class="subsec">Exercices pratiques</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Outil essentiel</span><span class="acc-title">Identifier ses signaux d'alarme personnels</span><span class="acc-arrow">▼</span></div><div class="acc-body"><div class="step-box"><strong>À noter quand vous allez mieux :</strong><br>— Quels changements remarquez-vous au tout début d'un épisode ?<br>— Qu'est-ce qui change dans votre sommeil en premier ?<br>— Comment votre entourage remarque-t-il que ça ne va pas ?<br>— Quelles pensées reviennent au début des épisodes ?<br><br><strong>Signaux fréquents :</strong> lever difficile plusieurs jours, annulation de sorties, rumination intense, perte d'intérêt pour une activité aimée.</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Traitement</span><span class="acc-title">Questions fréquentes sur les antidépresseurs</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <div class="thought-row"><div class="t-label">Délai d'action</div>2 à 4 semaines pour voir l'effet sur l'humeur. Ne pas arrêter avant ce délai.</div>
+        <div class="thought-row"><div class="t-label">Dépendance</div>Pas de dépendance addictive. Arrêt brutal → syndrome de discontinuation. Toujours arrêter progressivement avec l'avis du médecin.</div>
+        <div class="thought-row"><div class="t-label">Durée</div>6 à 12 mois après guérison d'un premier épisode pour prévenir la rechute. C'est de la médecine préventive.</div>
+        <div class="thought-row"><div class="t-label">"Je me sens mieux, j'arrête"</div>Se sentir mieux signifie que le traitement fonctionne — pas qu'il n'est plus nécessaire. Arrêter trop tôt est la principale cause de rechute.</div>
+      </div></div>
+      <div class="alert alert-amber">En cas de rechute ou pensées suicidaires : contactez votre médecin rapidement. Urgence : <strong>3114</strong> ou <strong>15</strong>.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================== AUTO-SOINS SOMMEIL -->
+<div id="page-sommeil" class="page">
+  <div class="page-banner" style="background:linear-gradient(150deg,#1a2c5a 0%,#0d1c40 100%);">
+    <div class="wrap" style="padding-top:0; padding-bottom:0;">
+      <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; opacity:0.65; margin-bottom:0.85rem;">TCC-I — Thérapie Cognitive et Comportementale de l'Insomnie</div>
+      <h1>Retrouver un sommeil réparateur</h1>
+      <p>Conseils comportementaux et TCC-I — la méthode la plus efficace pour l'insomnie chronique.</p>
+      <div class="note">⚠ Ces conseils complètent un suivi médical — consultez votre médecin si l'insomnie persiste.</div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="alert alert-blue"><strong>La TCC-I (Thérapie Cognitive et Comportementale pour l'Insomnie)</strong> est recommandée en première intention par toutes les sociétés savantes (HAS, NICE, American Academy of Sleep Medicine) — avant les somnifères, dont l'usage prolongé est déconseillé.</div>
+
+    <div class="mod-header" style="margin-top:2rem;">
+      <div class="mod-icon" style="background:var(--sky-50);">🧠</div>
+      <div><div class="mod-sub">Comprendre avant d'agir</div><div class="mod-title">Pourquoi je ne dors pas ?</div></div>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4 style="color:var(--teal);">Le cercle vicieux de l'insomnie</h4>
+        <p>L'insomnie chronique s'auto-entretient : une mauvaise nuit génère de l'anxiété anticipatoire ("Je vais encore mal dormir") → qui active le système nerveux → qui empêche le sommeil → qui confirme la crainte. La TCC-I agit sur ce cercle en modifiant comportements et pensées.</p>
+      </div>
+      <div class="info-card">
+        <h4 style="color:var(--sky-600);">Ce qui maintient l'insomnie</h4>
+        <ul>
+          <li>Passer trop de temps au lit éveillé</li>
+          <li>Horaires irréguliers de lever et coucher</li>
+          <li>Siestes compensatoires prolongées</li>
+          <li>Anxiété de performance (essayer de dormir)</li>
+          <li>Hypervigilance aux sensations corporelles</li>
+          <li>Pensées catastrophiques sur le sommeil</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsec">Les techniques validées de la TCC-I</div>
+
+    <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">Règle fondamentale</span><span class="acc-title">Restriction du temps au lit (Sleep Restriction)</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+      <p>Contre-intuitif mais très efficace : on réduit le temps passé au lit pour consolider le sommeil et recréer une pression de sommeil efficace.</p>
+      <div class="step-box">
+        <strong>Principe :</strong><br>
+        1. Estimez votre temps de sommeil réel moyen par nuit (ex. 5h)<br>
+        2. Fixez une plage de lit = votre temps de sommeil réel + 30 min (ex. 5h30)<br>
+        3. Choisissez une heure de lever fixe (ex. 7h) → heure de coucher = 1h30<br>
+        4. Ne vous couchez pas avant l'heure fixée, même si vous avez sommeil<br>
+        5. Si l'efficacité du sommeil dépasse 85% pendant 5 nuits, avancez le coucher de 15 min<br><br>
+        <em>Cette technique est difficile les premières semaines — la fatigue augmente avant de diminuer. C'est normal et signe que le traitement fonctionne.</em>
+      </div>
+    </div></div>
+
+    <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">Règle fondamentale</span><span class="acc-title">Contrôle du stimulus</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+      <p>Le lit doit redevenir un signal de sommeil — pas d'éveil, d'anxiété ou d'activité. Cette technique reconditionne l'association lit → sommeil.</p>
+      <div class="step-box">
+        <strong>Les 5 règles du contrôle du stimulus :</strong><br><br>
+        1. <strong>Ne vous couchez que quand vous avez sommeil</strong> (somnolence, pas fatigue)<br>
+        2. <strong>Le lit = sommeil + sexualité uniquement.</strong> Pas de télévision, téléphone, lecture, travail, rumination au lit.<br>
+        3. <strong>Si vous ne dormez pas après 20 minutes</strong>, levez-vous et allez dans une autre pièce faire quelque chose de calme. Revenez au lit uniquement quand vous ressentez à nouveau le sommeil.<br>
+        4. <strong>Même heure de lever chaque matin</strong>, 7 jours/7 — même si nuit courte.<br>
+        5. <strong>Pas de sieste</strong> (ou max 20 min avant 15h en début de traitement).
+      </div>
+    </div></div>
+
+    <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">Hygiène du sommeil</span><span class="acc-title">Les règles d'hygiène du sommeil</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+      <div class="info-grid" style="margin-top:1rem;">
+        <div class="info-card">
+          <h4 style="color:var(--teal);">À faire ✓</h4>
+          <ul>
+            <li>Lever à heure fixe chaque jour (ancre circadienne)</li>
+            <li>Exposez-vous à la lumière naturelle le matin</li>
+            <li>Exercice physique régulier (mais pas après 18h)</li>
+            <li>Chambre fraîche (16–19°C), sombre, silencieuse</li>
+            <li>Routine apaisante 1h avant le coucher</li>
+            <li>Techniques de relaxation (respiration, sophrologie)</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4 style="color:var(--coral);">À éviter ✗</h4>
+          <ul>
+            <li>Caféine après 14h (café, thé, sodas, chocolat)</li>
+            <li>Alcool le soir (fragmente le sommeil profond)</li>
+            <li>Écrans lumineux 1h avant le coucher (lumière bleue)</li>
+            <li>Repas copieux tard le soir</li>
+            <li>Regarder l'heure la nuit</li>
+            <li>Siestes longues ou tardives</li>
+          </ul>
+        </div>
+      </div>
+    </div></div>
+
+    <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Restructuration cognitive</span><span class="acc-title">Modifier les croyances dysfonctionnelles sur le sommeil</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+      <p>Les personnes souffrant d'insomnie entretiennent souvent des croyances erronées qui amplifient l'anxiété autour du sommeil.</p>
+      <div class="thought-row"><div class="t-label">Croyance fréquente</div><em>"Je dois absolument dormir 8 heures sinon demain sera catastrophique."</em></div>
+      <div class="thought-row"><div class="t-label">Réalité</div>Le besoin de sommeil varie selon les individus (6–9h). Une nuit courte est inconfortable mais rarement catastrophique pour la santé ou les performances.</div>
+      <div class="thought-row"><div class="t-label">Croyance fréquente</div><em>"Si je ne dors pas maintenant, je ne pourrai plus jamais dormir normalement."</em></div>
+      <div class="thought-row"><div class="t-label">Réalité</div>La pression de sommeil s'accumule naturellement — plus vous restez éveillé, plus vous dormirez facilement la nuit suivante.</div>
+      <div class="thought-row"><div class="t-label">Croyance fréquente</div><em>"Je dois essayer très fort de dormir."</em></div>
+      <div class="thought-row"><div class="t-label">Réalité</div>Le sommeil ne peut pas être forcé — "essayer de dormir" active le système nerveux et empêche le sommeil. L'objectif est de créer des conditions favorables, pas de "contrôler" le sommeil.</div>
+      <div class="step-box" style="margin-top:1rem;"><strong>Technique de paradoxe :</strong> Au lieu d'essayer de dormir, essayez intentionnellement de rester éveillé les yeux fermés. Cette injonction paradoxale réduit l'anxiété de performance et facilite souvent l'endormissement.</div>
+    </div></div>
+
+    <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">Relaxation</span><span class="acc-title">Techniques de relaxation pour le sommeil</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+      <div class="step-box">
+        <strong>Respiration 4-7-8 :</strong><br>
+        — Inspirez par le nez : 4 secondes<br>
+        — Bloquez : 7 secondes<br>
+        — Expirez lentement par la bouche : 8 secondes<br>
+        — Répétez 4 cycles<br><br>
+        <strong>Relaxation musculaire progressive (Jacobson) :</strong><br>
+        Allongé, contractez puis relâchez chaque groupe musculaire de bas en haut (pieds → mollets → cuisses → ventre → épaules → bras → visage). 15–20 min.<br><br>
+        <strong>Body scan de pleine conscience :</strong><br>
+        Parcourez mentalement chaque partie du corps en observant les sensations, sans jugement. Applications disponibles : Petit Bambou, Headspace.
+      </div>
+    </div></div>
+
+    <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Luminothérapie</span><span class="acc-title">Lumière et rythme circadien</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+      <div class="step-box">
+        <strong>Lumière le matin :</strong> 30 minutes d'exposition à la lumière naturelle (ou lampe 10 000 lux) dans l'heure suivant le lever. Synchronise l'horloge biologique et avance l'heure d'endormissement le soir.<br><br>
+        <strong>Lumière le soir :</strong> Réduire l'exposition aux lumières vives et écrans 2h avant le coucher. Porter des lunettes anti-lumière bleue si nécessaire.<br><br>
+        <strong>Indications particulières :</strong> La luminothérapie est particulièrement efficace pour les personnes qui ont un rythme "du soir" (endormissement tardif, lever difficile) ou en cas de dépression saisonnière associée.
+      </div>
+    </div></div>
+
+    <div class="alert alert-amber" style="margin-top:1.5rem;">
+      <strong>Quand consulter :</strong> Si l'insomnie dure depuis plus de 3 mois, une TCC-I structurée avec un thérapeute formé est recommandée. En cas de suspicion d'apnée du sommeil (ronflements, somnolence diurne intense), une polysomnographie est nécessaire.
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================== TROUBLE BIPOLAIRE -->
+<div id="page-bipolaire" class="page">
+  <div class="page-banner" style="background:linear-gradient(150deg,#6B4C0A 0%,#4A3308 100%);">
+    <div class="wrap" style="padding-top:0; padding-bottom:0;">
+      <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; opacity:0.65; margin-bottom:0.85rem;">Psychoéducation — Données probantes</div>
+      <h1>Vivre avec le trouble bipolaire</h1>
+      <p>Comprendre la maladie, reconnaître les épisodes, stabiliser au quotidien.</p>
+      <div class="note">⚠ Cette page est un complément à votre suivi psychiatrique — jamais un substitut.</div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="mods-grid">
+      <a class="mod-nav" href="#b-comprendre"><div class="ic">🧠</div><h4>Comprendre</h4><p>Qu'est-ce que c'est ?</p></a>
+      <a class="mod-nav" href="#b-signaux"><div class="ic">🔍</div><h4>Reconnaître les épisodes</h4><p>Signaux précoces</p></a>
+      <a class="mod-nav" href="#b-rythme"><div class="ic">📅</div><h4>Rythme et sommeil</h4><p>Stabilisation</p></a>
+      <a class="mod-nav" href="#b-medicaments"><div class="ic">💊</div><h4>Traitement</h4><p>Thymorégulateurs</p></a>
+      <a class="mod-nav" href="#b-quotidien"><div class="ic">🌅</div><h4>Vie quotidienne</h4><p>Stratégies pratiques</p></a>
+    </div>
+
+    <div id="b-comprendre" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--gold-pale);">🧠</div><div><div class="mod-sub">Psychoéducation</div><div class="mod-title">Comprendre le trouble bipolaire</div></div></div>
+      <div class="info-grid">
+        <div class="info-card">
+          <h4 style="color:var(--gold);">Qu'est-ce que c'est ?</h4>
+          <p>Le trouble bipolaire est une maladie de l'humeur caractérisée par l'alternance d'épisodes dépressifs et d'épisodes maniaques ou hypomaniaques, séparés par des périodes de stabilité (euthymie). Il touche environ 2 à 3% de la population. Ce n'est pas une faiblesse de caractère — c'est une maladie neurobiologique.</p>
+        </div>
+        <div class="info-card">
+          <h4 style="color:var(--sky-600);">Types principaux</h4>
+          <ul>
+            <li><strong>Type I :</strong> Épisodes maniaques complets (hospitalisations possibles) + épisodes dépressifs</li>
+            <li><strong>Type II :</strong> Épisodes hypomaniaques (moins sévères) + épisodes dépressifs souvent au premier plan</li>
+            <li><strong>Cyclothymie :</strong> Fluctuations moins sévères mais persistantes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <div id="b-signaux" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--gold-pale);">🔍</div><div><div class="mod-sub">Détection précoce</div><div class="mod-title">Reconnaître les épisodes</div></div></div>
+      <div class="alert alert-blue">Reconnaître ses propres signaux d'alarme précoces est l'une des compétences les plus protectrices dans le trouble bipolaire. Plus tôt un épisode est détecté, plus facile il est d'intervenir.</div>
+      <div class="subsec">Signaux d'un épisode maniaque ou hypomaniaque</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Signaux précoces manie</span><span class="acc-title">Reconnaître le début d'un épisode maniaque / hypomaniaque</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <div class="info-grid" style="margin-top:1rem;">
+          <div class="info-card">
+            <h4 style="color:var(--gold);">Signaux fréquents</h4>
+            <ul>
+              <li>Besoin de sommeil réduit sans fatigue</li>
+              <li>Humeur plus élevée que d'habitude, euphorie</li>
+              <li>Pensées qui s'accélèrent, idées qui fusent</li>
+              <li>Augmentation de l'énergie et de l'activité</li>
+              <li>Irritabilité, impatience inhabituelle</li>
+              <li>Projets multiples débutés simultanément</li>
+              <li>Sociabilité accrue, réduction de l'inhibition sociale</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h4 style="color:var(--coral);">Comportements à risque</h4>
+            <ul>
+              <li>Dépenses excessives ou inhabituelles</li>
+              <li>Décisions importantes impulsives</li>
+              <li>Comportements sexuels inhabituels</li>
+              <li>Consommation accrue d'alcool ou de substances</li>
+              <li>Arrêt du traitement ("Je vais bien, j'en ai plus besoin")</li>
+              <li>Conflits relationnels multiples</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step-box" style="margin-top:1rem;"><strong>À faire dès l'apparition des signaux :</strong><br>1. Contactez votre psychiatre rapidement<br>2. Priorité absolue au sommeil (même sans fatigue)<br>3. Réduire les stimulations (évènements sociaux, voyages, décisions importantes)<br>4. Ne pas arrêter le traitement seul</div>
+      </div></div>
+
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Signaux précoces dépression</span><span class="acc-title">Reconnaître le début d'un épisode dépressif</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <ul>
+          <li>Lever plus difficile, fatigue dès le matin</li>
+          <li>Perte d'intérêt pour des activités habituellement aimées</li>
+          <li>Isolement progressif, annulation de sorties</li>
+          <li>Rumination et pensées négatives qui reviennent</li>
+          <li>Troubles du sommeil (insomnie en fin de nuit ou hypersomnie)</li>
+          <li>Retrait social, sentiment de vide</li>
+        </ul>
+        <div class="step-box" style="margin-top:1rem;"><strong>À faire dès l'apparition des signaux :</strong><br>1. Contacter votre psychiatre<br>2. Maintenir le traitement<br>3. Maintenir un niveau minimal d'activité (activation comportementale)<br>4. Maintenir les contacts sociaux même réduits</div>
+      </div></div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <div id="b-rythme" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--sky-50);">📅</div><div><div class="mod-sub">Stabilisation biologique</div><div class="mod-title">Rythme de vie et sommeil</div></div></div>
+      <div class="alert alert-teal">La régularité des rythmes biologiques est <strong>le facteur de stabilisation le plus puissant</strong> dans le trouble bipolaire, en complément du traitement médicamenteux.</div>
+      <div class="subsec">Les piliers de la stabilisation</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">Priorité absolue</span><span class="acc-title">Régularité des horaires de sommeil</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <div class="step-box">
+          <strong>Le sommeil est le baromètre du trouble bipolaire :</strong><br><br>
+          — La réduction du sommeil est souvent le <em>premier signal</em> d'un épisode maniaque<br>
+          — L'augmentation du sommeil est souvent le premier signal d'un épisode dépressif<br><br>
+          <strong>Règles fondamentales :</strong><br>
+          1. Coucher et lever à heure fixe, 7j/7 — même le week-end, même en vacances<br>
+          2. Si vous vous sentez "en pleine forme" à 3h du matin : c'est un signal d'alarme, pas un avantage<br>
+          3. Viser 7 à 8 heures de sommeil chaque nuit<br>
+          4. Notez votre heure de lever et de coucher dans un agenda de l'humeur
+        </div>
+      </div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">Stabilisation</span><span class="acc-title">Régularité des rythmes sociaux (IPSRT)</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <p>L'IPSRT (Interpersonal and Social Rhythm Therapy) est une thérapie validée pour le trouble bipolaire qui s'appuie sur la régularité des rythmes sociaux.</p>
+        <div class="step-box">
+          <strong>À réguler et à horaires fixes chaque jour :</strong><br>
+          — Heure du lever<br>
+          — Premier contact social de la journée<br>
+          — Début de l'activité principale (travail, etc.)<br>
+          — Repas (matin, midi, soir)<br>
+          — Activité physique<br>
+          — Heure du coucher<br><br>
+          <em>La régularité de ces 6 éléments réduit significativement le risque de rechute.</em>
+        </div>
+      </div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-blue">Outil</span><span class="acc-title">L'agenda de l'humeur</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <div class="step-box">
+          Chaque soir, notez :<br>
+          — Humeur de -3 (déprimé) à +3 (maniaque), 0 = euthymie<br>
+          — Heures de coucher et lever<br>
+          — Niveau d'énergie de 0 à 10<br>
+          — Médicaments pris (oui/non)<br>
+          — Événements importants de la journée<br>
+          — Consommation d'alcool ou de substances<br><br>
+          Cet agenda permet de repérer les tendances, les déclencheurs et les signaux précoces. Apportez-le à chaque consultation.
+        </div>
+        <div class="hl-box hl-gold" style="margin-top:1rem;"><span class="hl-label">Application recommandée</span>eMoods (iOS/Android) — agenda de l'humeur spécialement conçu pour le trouble bipolaire, gratuit.</div>
+      </div></div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <div id="b-medicaments" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--gold-pale);">💊</div><div><div class="mod-sub">Traitement de fond</div><div class="mod-title">Thymorégulateurs : ce qu'il faut savoir</div></div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Information essentielle</span><span class="acc-title">Pourquoi continuer le traitement même quand ça va bien ?</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <div class="thought-row"><div class="t-label">Question fréquente</div><em>"Je me sens bien depuis 6 mois, est-ce que je peux arrêter le traitement ?"</em></div>
+        <div class="thought-row"><div class="t-label">Réponse</div>Se sentir bien est souvent <em>le résultat</em> du traitement, pas la preuve qu'il n'est plus nécessaire. L'arrêt brutal du lithium ou d'un thymorégulateur est associé à un risque élevé de rechute rapide.</div>
+        <div class="thought-row"><div class="t-label">Règle absolue</div>Ne jamais arrêter ou modifier un thymorégulateur sans l'accord de votre psychiatre. Même progressivement, cela nécessite une surveillance médicale.</div>
+        <div class="step-box" style="margin-top:1rem;"><strong>Lithium — points importants :</strong><br>— Dosages sanguins réguliers indispensables (lithiémie)<br>— Fonction rénale et thyroïdienne à surveiller régulièrement<br>— Hydratation importante (boire suffisamment d'eau, surtout en été)<br>— Attention aux médicaments qui modifient la lithiémie (AINS, diurétiques)</div>
+      </div></div>
+    </div>
+
+    <hr class="div" style="margin:2.5rem 0;">
+
+    <div id="b-quotidien" style="scroll-margin-top:74px;">
+      <div class="mod-header"><div class="mod-icon" style="background:var(--gold-pale);">🌅</div><div><div class="mod-sub">Stratégies pratiques</div><div class="mod-title">Vie quotidienne avec le trouble bipolaire</div></div></div>
+      <div class="subsec">Ce qui protège</div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Facteurs protecteurs</span><span class="acc-title">Les habitudes qui stabilisent</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <ul>
+          <li><strong>Rythme de sommeil régulier</strong> — priorité absolue (voir ci-dessus)</li>
+          <li><strong>Exercice physique modéré et régulier</strong> — stabilise l'humeur et réduit le risque de rechute</li>
+          <li><strong>Éviter l'alcool et les substances</strong> — déstabilisent fortement l'humeur et interagissent avec les médicaments</li>
+          <li><strong>Gérer le stress</strong> — les événements de vie stressants sont des déclencheurs ; identifier et prévenir les situations à risque</li>
+          <li><strong>Réseau de soutien</strong> — avoir un proche "référent" qui peut alerter si un épisode se prépare</li>
+          <li><strong>Continuité du suivi psychiatrique</strong> — même quand ça va bien</li>
+        </ul>
+      </div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Déclencheurs</span><span class="acc-title">Les facteurs qui déstabilisent</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <ul>
+          <li><strong>Privation de sommeil</strong> — même une nuit courte peut déclencher un épisode hypomaniaque</li>
+          <li><strong>Décalage horaire / travail de nuit</strong> — désynchronisent le rythme circadien</li>
+          <li><strong>Alcool et cannabis</strong> — déclencheurs majeurs d'épisodes</li>
+          <li><strong>Stress intense</strong> (conflits, deuils, pertes d'emploi)</li>
+          <li><strong>Antidépresseurs seuls</strong> (sans thymorégulateur) — peuvent induire un virage maniaque</li>
+          <li><strong>Arrêt brutal du traitement</strong></li>
+          <li><strong>Suractivité prolongée</strong> (voyages intenses, projets multiples)</li>
+        </ul>
+        <div class="hl-box hl-gold" style="margin-top:1rem;"><span class="hl-label">Plan de crise personnel</span>Élaborez avec votre psychiatre un plan écrit : signaux d'alarme personnels, personnes à contacter, médicaments de secours, hôpital référent. Gardez-le accessible.</div>
+      </div></div>
+      <div class="acc"><div class="acc-h" onclick="tog(this)"><span class="acc-badge b-gold">Communication</span><span class="acc-title">Parler de la maladie à son entourage</span><span class="acc-arrow">▼</span></div><div class="acc-body">
+        <div class="step-box">
+          <strong>Choisir à qui parler :</strong> Il n'est pas nécessaire de tout dire à tout le monde. Choisissez 1 à 2 personnes de confiance qui peuvent :<br>
+          — Repérer les signaux d'alarme que vous ne voyez pas vous-même<br>
+          — Vous aider à contacter votre psychiatre si nécessaire<br>
+          — Intervenir en cas d'urgence<br><br>
+          <strong>Ce qui aide les proches :</strong><br>
+          — Comprendre que les comportements pendant un épisode ne reflètent pas votre personnalité<br>
+          — Savoir qu'ils peuvent appeler votre psychiatre s'ils sont inquiets<br>
+          — Groupes de soutien pour les familles : <strong>UNAFAM</strong> (unafam.org)
+        </div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================== MÉDICAMENTS -->
+<div id="page-medicaments" class="page">
+  <div class="wrap">
+    <div class="sec-label">Psychopharmacologie</div>
+    <h1 class="sec-title">Fiches médicaments</h1>
+    <p class="sec-intro">Ces fiches vous aident à comprendre votre traitement. Elles ne remplacent pas les conseils de votre médecin.</p>
+    <div class="alert alert-amber">Ne modifiez jamais votre traitement sans l'accord de votre médecin. Ces informations sont générales.</div>
+
+    <div class="med-sec">
+      <div class="med-h"><span style="font-size:22px;">🌿</span><h3>Antidépresseurs — ISRS</h3></div>
+      <div class="med-body">
+        <p style="font-size:15px; color:var(--ink-soft); line-height:1.7;">Médicaments de première intention dans la dépression et les troubles anxieux. Délai d'action 2 à 4 semaines.</p>
+        <div class="med-grid">
+          <div class="med-item"><h4>Fluoxétine</h4><div class="dci">Longue demi-vie</div><p>Dépression, TOC, boulimie. Intéressant si oublis fréquents.</p></div>
+          <div class="med-item"><h4>Sertraline</h4><div class="dci">Zoloft®</div><p>Dépression, troubles anxieux, TOC, PTSD. Bonne tolérance.</p></div>
+          <div class="med-item"><h4>Escitalopram</h4><div class="dci">Seroplex®</div><p>Dépression et TAG. Parmi les mieux tolérés.</p></div>
+          <div class="med-item"><h4>Paroxétine</h4><div class="dci">Deroxat®</div><p>Dépression, anxiété sociale, TOC, PTSD, panique. Arrêt progressif obligatoire.</p></div>
+        </div>
+        <div class="hl-box hl-teal" style="margin-top:1.25rem; font-size:14px;"><span class="hl-label">Effets indésirables initiaux fréquents</span>Nausées, troubles du sommeil, céphalées — généralement transitoires (1–2 semaines).</div>
+      </div>
+    </div>
+
+    <div class="med-sec">
+      <div class="med-h"><span style="font-size:22px;">⚡</span><h3>Antidépresseurs — IRSN</h3></div>
+      <div class="med-body">
+        <p style="font-size:15px; color:var(--ink-soft); line-height:1.7;">Agissent sur sérotonine + noradrénaline. Efficaces sur dépression et douleur chronique associée.</p>
+        <div class="med-grid">
+          <div class="med-item"><h4>Venlafaxine</h4><div class="dci">Effexor®</div><p>Dépression, TAG, anxiété sociale. Arrêt progressif obligatoire.</p></div>
+          <div class="med-item"><h4>Duloxétine</h4><div class="dci">Cymbalta®</div><p>Dépression, TAG, douleurs neuropathiques.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="med-sec">
+      <div class="med-h"><span style="font-size:22px;">🌙</span><h3>Anxiolytiques — Benzodiazépines</h3></div>
+      <div class="med-body">
+        <p style="font-size:15px; color:var(--ink-soft); line-height:1.7;">Efficaces à court terme sur l'anxiété aiguë. <strong>Usage limité dans le temps</strong> (risque de dépendance).</p>
+        <div class="med-grid">
+          <div class="med-item"><h4>Alprazolam</h4><div class="dci">Xanax®</div><p>Anxiété aiguë, crises de panique.</p></div>
+          <div class="med-item"><h4>Bromazépam</h4><div class="dci">Lexomil®</div><p>Anxiété situationnelle.</p></div>
+          <div class="med-item"><h4>Diazépam</h4><div class="dci">Valium®</div><p>Longue demi-vie. Anxiété sévère, sevrage alcoolique.</p></div>
+          <div class="med-item"><h4>Oxazépam</h4><div class="dci">Séresta®</div><p>Bien toléré chez le sujet âgé.</p></div>
+        </div>
+        <div class="hl-box hl-coral" style="margin-top:1.25rem; font-size:14px;"><span class="hl-label">Risques</span>Dépendance possible dès 4 semaines quotidiennes. Jamais d'arrêt brutal. Jamais d'association avec l'alcool. Ne pas conduire après la prise.</div>
+      </div>
+    </div>
+
+    <div class="med-sec">
+      <div class="med-h"><span style="font-size:22px;">⚖️</span><h3>Thymorégulateurs</h3></div>
+      <div class="med-body">
+        <p style="font-size:15px; color:var(--ink-soft); line-height:1.7;">Stabilisateurs de l'humeur pour le trouble bipolaire. Nécessitent un suivi biologique régulier.</p>
+        <div class="med-grid">
+          <div class="med-item"><h4>Lithium</h4><div class="dci">Téralithe®</div><p>Référence du trouble bipolaire. Lithiémie régulière indispensable. Surveillance rénale et thyroïdienne.</p></div>
+          <div class="med-item"><h4>Valproate</h4><div class="dci">Dépakote®</div><p>Prévention rechutes maniaques. Contre-indiqué chez femme en âge de procréer sans contraception.</p></div>
+          <div class="med-item"><h4>Lamotrigine</h4><div class="dci">Lamictal®</div><p>Prévention épisodes dépressifs bipolaires. Introduction très progressive obligatoire.</p></div>
+          <div class="med-item"><h4>Aripiprazole</h4><div class="dci">Abilify®</div><p>Adjuvant dans dépression résistante et trouble bipolaire.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="med-sec">
+      <div class="med-h"><span style="font-size:22px;">😴</span><h3>Hypnotiques</h3></div>
+      <div class="med-body">
+        <div class="med-grid">
+          <div class="med-item"><h4>Zolpidem</h4><div class="dci">Stilnox®</div><p>Facilite l'endormissement. Max 28 jours. Ne pas conduire le lendemain matin.</p></div>
+          <div class="med-item"><h4>Mélatonine LP</h4><div class="dci">Circadin®</div><p>Option non-benzodiazépinique pour les troubles du rythme circadien. Bien toléré.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================== TESTS -->
+<div id="page-tests" class="page">
+  <div class="wrap">
+    <div class="sec-label">Auto-évaluation</div>
+    <h1 class="sec-title">Tests d'auto-évaluation</h1>
+    <p class="sec-intro">Questionnaires validés pour évaluer vos symptômes. Ces tests ne constituent pas un diagnostic — discutez des résultats avec votre médecin.</p>
+    <div class="alert alert-blue">Ces outils sont des aides à la décision clinique, pas des diagnostics.</div>
+
+    <div class="test-card"><div class="test-icon" style="background:var(--purple-pale);">🌧</div><div><h3>PHQ-9 — Dépression</h3><p>9 questions sur les 2 dernières semaines. Évalue la sévérité des symptômes dépressifs. Validé internationalement.</p><a href="https://www.docteurjurion.net/test-de-beck" target="_blank">→ Accéder au test</a></div></div>
+    <div class="test-card"><div class="test-icon" style="background:var(--teal-pale);">🌀</div><div><h3>GAD-7 — Anxiété généralisée</h3><p>7 questions. Score 0–21. Seuil de traitement à 10. Très utilisé en pratique clinique.</p><a href="https://www.docteurjurion.net/tests" target="_blank">→ Accéder au test</a></div></div>
+    <div class="test-card"><div class="test-icon" style="background:var(--gold-pale);">🔄</div><div><h3>Test de Angst — Bipolarité / Hypomanie</h3><p>Évalue les caractéristiques d'un épisode de manie ou d'hypomanie sur une période d'au moins une semaine.</p><a href="https://www.docteurjurion.net/test-angst" target="_blank">→ Accéder au test</a></div></div>
+    <div class="test-card"><div class="test-icon" style="background:var(--coral-pale);">🔥</div><div><h3>MBI — Burnout</h3><p>Maslach Burnout Inventory. Épuisement émotionnel, dépersonnalisation, accomplissement professionnel.</p><a href="https://www.docteurjurion.net/tests" target="_blank">→ Accéder au test</a></div></div>
+    <div class="test-card"><div class="test-icon" style="background:var(--sky-50);">😴</div><div><h3>ISI — Insomnie</h3><p>Insomnia Severity Index. 7 questions sur la nature, la sévérité et l'impact de l'insomnie.</p><a href="https://www.docteurjurion.net/tests" target="_blank">→ Accéder au test</a></div></div>
+    <div class="test-card"><div class="test-icon" style="background:var(--coral-pale);">🍷</div><div><h3>AUDIT — Alcool</h3><p>10 questions pour évaluer votre consommation d'alcool et repérer un usage à risque.</p><a href="https://www.docteurjurion.net/tests" target="_blank">→ Accéder au test</a></div></div>
+  </div>
+</div>
+
+<!-- ====================================================== BIBLIOTHÉRAPIE -->
+<div id="page-biblio" class="page">
+  <div class="wrap">
+    <div class="sec-label">Bibliothérapie</div>
+    <h1 class="sec-title">Livres recommandés</h1>
+    <p class="sec-intro">Des ouvrages pour mieux comprendre ce que vous vivez, issus de la sélection du Dr Jurion-Daclin.</p>
+
+    <div class="subsec">Troubles anxieux</div>
+    <div class="book-grid">
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_65a5afddf5f143b292e701ea1c4d621c~mv2.png/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_65a5afddf5f143b292e701ea1c4d621c~mv2.png" alt="Je dépasse mes peurs"><div class="book-info"><h4>Je dépasse mes peurs…</h4><div class="author">C. André et Muzo</div><p>Éclairage sur les angoisses et leurs origines, avec des solutions et dessins humoristiques. Auteur psychiatre spécialisé en troubles anxieux.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_a32297de53ac4f17bc8dd551ddee7934~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_a32297de53ac4f17bc8dd551ddee7934~mv2.jpg" alt="Petit ou grand anxieux ?"><div class="book-info"><h4>Petit ou grand anxieux ?</h4><div class="author">A. Braconnier</div><p>Êtes-vous créatif, réflexif ou combatif dans votre anxiété ? Comment en faire une force. Clés pour mieux vous aider.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_69f6cd51dc8643cb8ecdc51db825a408~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_69f6cd51dc8643cb8ecdc51db825a408~mv2.jpg" alt="Faire face aux paniques"><div class="book-info"><h4>Faire face aux paniques</h4><div class="author">F. Peyre</div><p>Guide pratique avec exemples, exercices et résumés pour vaincre crises de panique et agoraphobie par la TCC.</p></div></div>
+    </div>
+
+    <div class="subsec">Phobie sociale</div>
+    <div class="book-grid">
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_42f291e024a14fd29f29ffe3329a2e91~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_42f291e024a14fd29f29ffe3329a2e91~mv2.jpg" alt="La peur des autres"><div class="book-info"><h4>La peur des autres</h4><div class="author">C. André, P. Légeron</div><p>De la timidité au trac. Mécanismes, médicaments, psychothérapie. Grand classique mis à jour par deux psychiatres.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_e5cfe0e9e2f546bcb405a3f702bd7bef~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_e5cfe0e9e2f546bcb405a3f702bd7bef~mv2.jpg" alt="Méthode anti-phobies sociales"><div class="book-info"><h4>Méthode anti-phobies sociales</h4><div class="author">F. Trybou, E. Hantouche</div><p>De la peur normale à phobique. Cahier pratique : exercices, tests, relaxation, conditionnement.</p></div></div>
+    </div>
+
+    <div class="subsec">Troubles dépressifs</div>
+    <div class="book-grid">
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_fb4e74651dbb4145ad09829aa16a7fee~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_fb4e74651dbb4145ad09829aa16a7fee~mv2.jpg" alt="La dépression : maladie ou chance ?"><div class="book-info"><h4>La dépression : maladie ou chance ?</h4><div class="author">M. Nabati</div><p>La dépression comme crise maturante, occasion de guérir et de devenir soi-même.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_2b7e2415809641c9a19530ab0f5f338e~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_2b7e2415809641c9a19530ab0f5f338e~mv2.jpg" alt="La dépression : comment en sortir ?"><div class="book-info"><h4>La dépression : comment en sortir ?</h4><div class="author">Dr Mirabel-Sarron</div><p>Guide pratique. Méthode pour changer sa vision de soi et du monde. La dépression se soigne.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_7f9aaa779851479db33eca166469d693~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_7f9aaa779851479db33eca166469d693~mv2.jpg" alt="Faire face à la dépression"><div class="book-info"><h4>Faire face à la dépression</h4><div class="author">C. Cungi</div><p>Guide du savoir-faire dépressif. Techniques de restructuration cognitive très efficaces.</p></div></div>
+    </div>
+
+    <div class="subsec">TOC</div>
+    <div class="book-grid">
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_09d06fa4aeba48c18487d64bc1537397~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_09d06fa4aeba48c18487d64bc1537397~mv2.jpg" alt="TOC vivre avec et s'en libérer"><div class="book-info"><h4>TOC — Vivre avec et s'en libérer</h4><div class="author">E. Hantouche</div><p>Carnet de bord journalier pour l'abandon des TOC. Rédigé avec l'AFTOC et testé par des patients.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_1852640f4e124ed9b5b8d0cdb6077a21~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_1852640f4e124ed9b5b8d0cdb6077a21~mv2.jpg" alt="Faire face aux TOC"><div class="book-info"><h4>Faire face aux TOC</h4><div class="author">R. Neveu</div><p>Guide pratique d'auto-guérison, écrit par un patient en collaboration avec son thérapeute.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_c26a0034eeac4be9965d48fcaa0a5532~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_c26a0034eeac4be9965d48fcaa0a5532~mv2.jpg" alt="Je ne peux pas m'arrêter de laver"><div class="book-info"><h4>Je ne peux pas m'arrêter de laver…</h4><div class="author">A. Sauteraud</div><p>Comprendre obsessions et compulsions. Méthodes efficaces. Premier guide pratique du TOC.</p></div></div>
+    </div>
+
+    <div class="subsec">Troubles bipolaires</div>
+    <div class="book-grid">
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_3d317d9be9f64604872867662de072df~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_3d317d9be9f64604872867662de072df~mv2.jpg" alt="Manuel de psychoéducation"><div class="book-info"><h4>Manuel de psychoéducation</h4><div class="author">C. Gay</div><p>15 séances de psychoéducation pour stabiliser la maladie. Accompagnement personnalisé.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_f7491d764a6147caa9024b8d511cc27a~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_f7491d764a6147caa9024b8d511cc27a~mv2.jpg" alt="Des hauts et des bas"><div class="book-info"><h4>Des hauts et des bas</h4><div class="author">N. Duchesne</div><p>Conseils concrets, utilisation des thérapeutiques disponibles. On peut agir efficacement et changer sa vie.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_6066d2c79fcb435793853ebaa14b1408~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_6066d2c79fcb435793853ebaa14b1408~mv2.jpg" alt="Manuel du bipolaire"><div class="book-info"><h4>Manuel du bipolaire</h4><div class="author">M. Deseilles et coll.</div><p>Symptômes, étiologie, mécanismes neurobiologiques, traitements. Présentation pratique.</p></div></div>
+    </div>
+
+    <div class="subsec">Estime de soi</div>
+    <div class="book-grid">
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_5c88fdf0278b48b6ac1819117b901026~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_5c88fdf0278b48b6ac1819117b901026~mv2.jpg" alt="Imparfaits, libres et heureux"><div class="book-info"><h4>Imparfaits, libres et heureux</h4><div class="author">C. André</div><p>Être enfin soi-même. Agir sans craindre l'échec ni le jugement. Construire, réparer et protéger l'estime de soi.</p></div></div>
+    </div>
+
+    <div class="subsec">Affirmation de soi</div>
+    <div class="book-grid">
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_a6753ddb8f834bb8804a370335b0a9bf~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_a6753ddb8f834bb8804a370335b0a9bf~mv2.jpg" alt="S'affirmer et communiquer"><div class="book-info"><h4>S'affirmer et communiquer</h4><div class="author">M. Beaudry</div><p>Dire "oui" quand on pense "oui", et "non" quand on pense "non". Respecter l'autre en communiquant.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_5a9b143f6983417fab46330cf72b2358~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_5a9b143f6983417fab46330cf72b2358~mv2.jpg" alt="Affirmez-vous"><div class="book-info"><h4>Affirmez-vous</h4><div class="author">F. Fanget</div><p>Trop passif ? Trop agressif ? Identifier émotions et comportements pour trouver sa place parmi les autres.</p></div></div>
+    </div>
+
+    <div class="subsec">Troubles du comportement alimentaire</div>
+    <div class="book-grid">
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_4f5e214e8f4a48cea676bfc20a827089~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_4f5e214e8f4a48cea676bfc20a827089~mv2.jpg" alt="Maigrir sans régime"><div class="book-info"><h4>Maigrir sans régime</h4><div class="author">JP. Zermati</div><p>Faire la paix avec la nourriture. Découvrir les secrets de la faim, du plaisir et de la satiété.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_dbaa6df0826d49d5ab698aad1f26fd5e~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_dbaa6df0826d49d5ab698aad1f26fd5e~mv2.jpg" alt="Maigrir c'est dans la tête"><div class="book-info"><h4>Maigrir c'est dans la tête</h4><div class="author">G. Apfeldorfer</div><p>Image de soi, relations avec les autres. Sept clés pour devenir mince et le rester.</p></div></div>
+      <div class="book-card"><img class="book-cover" src="https://static.wixstatic.com/media/826562_f45d8328affa4528a3db643f86fcbe36~mv2.jpg/v1/fill/w_300,h_200,al_c,q_85,enc_avif,quality_auto/826562_f45d8328affa4528a3db643f86fcbe36~mv2.jpg" alt="Comment sortir de l'anorexie"><div class="book-info"><h4>Comment sortir de l'anorexie…</h4><div class="author">Y. Simon</div><p>Guérir par soi-même avec l'aide de l'entourage. Oui, il est possible de s'en sortir.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================== LIENS UTILES -->
+<div id="page-liens" class="page">
+  <div class="wrap">
+    <div class="sec-label">Ressources externes</div>
+    <h1 class="sec-title">Liens utiles</h1>
+
+    <div class="subsec">Urgences et lignes d'écoute</div>
+    <div class="res-grid">
+      <div class="res-card" style="border-left:3px solid #C0392B;"><div class="flag">🆘</div><h4>3114 — Prévention du suicide</h4><p>Gratuit, 24h/24, 7j/7. Pour vous ou pour un proche en crise.</p></div>
+      <div class="res-card" style="border-left:3px solid #C0392B;"><div class="flag">🚑</div><h4>15 — SAMU</h4><p>Urgence médicale. En cas de crise psychiatrique sévère ou de danger immédiat.</p></div>
+      <div class="res-card" style="border-left:3px solid #E67E22;"><div class="flag">📞</div><h4>Fil Santé Jeunes</h4><p>Écoute anonyme et confidentielle pour les 12–25 ans. Gratuit.</p></div>
+    </div>
+
+    <div class="subsec">Trouver un professionnel</div>
+    <div class="res-grid">
+      <div class="res-card"><div class="flag">🇫🇷</div><h4>AFTCC</h4><p>Annuaire de thérapeutes TCC certifiés en France.</p><a href="https://www.aftcc.org" target="_blank">aftcc.org</a></div>
+      <div class="res-card"><div class="flag">🇫🇷</div><h4>MonPsy</h4><p>Remboursement de 8 séances chez un psychologue. Sur prescription médicale.</p><a href="https://monpsy.sante.gouv.fr" target="_blank">monpsy.sante.gouv.fr</a></div>
+      <div class="res-card"><div class="flag">🇫🇷</div><h4>Doctolib</h4><p>Rendez-vous médicaux en ligne. Filtrer par spécialité.</p><a href="https://www.doctolib.fr" target="_blank">doctolib.fr</a></div>
+    </div>
+
+    <div class="subsec">Associations de patients</div>
+    <div class="res-grid">
+      <div class="res-card"><div class="flag">💙</div><h4>France Dépression</h4><p>Groupes de soutien, permanence téléphonique, information.</p><a href="https://www.francedepression.fr" target="_blank">francedepression.fr</a></div>
+      <div class="res-card"><div class="flag">🟢</div><h4>UNAFAM</h4><p>Familles de personnes vivant avec un trouble psychique. Soutien, formation, écoute.</p><a href="https://www.unafam.org" target="_blank">unafam.org</a></div>
+      <div class="res-card"><div class="flag">🔁</div><h4>AFTOC — TOC</h4><p>Association française de personnes souffrant de TOC.</p><a href="https://www.aftoc.org" target="_blank">aftoc.org</a></div>
+    </div>
+
+    <div class="subsec">Ressources en ligne validées</div>
+    <div class="res-grid">
+      <div class="res-card"><div class="flag">🇦🇺</div><h4>THIS WAY UP</h4><p>Programmes TCC en ligne, validés par essais contrôlés randomisés. Anxiété, dépression, TOC, PTSD.</p><a href="https://thiswayup.org.au" target="_blank">thiswayup.org.au</a></div>
+      <div class="res-card"><div class="flag">🇦🇺</div><h4>MindSpot</h4><p>Service gratuit de TCC en ligne, gouvernement australien.</p><a href="https://www.mindspot.org.au" target="_blank">mindspot.org.au</a></div>
+      <div class="res-card"><div class="flag">🇬🇧</div><h4>NHS Every Mind Matters</h4><p>Ressources validées NICE pour anxiété, dépression, sommeil.</p><a href="https://www.nhs.uk/every-mind-matters" target="_blank">nhs.uk/every-mind-matters</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const t = document.getElementById('page-' + id);
+  if (t) { t.classList.add('active'); window.scrollTo(0,0); }
+  document.querySelectorAll('.nav-link').forEach(l => {
+    if (l.getAttribute('onclick') && l.getAttribute('onclick').includes("'" + id + "'")) l.classList.add('active');
+  });
+}
+function tog(h) {
+  const b = h.nextElementSibling;
+  const a = h.querySelector('.acc-arrow');
+  const o = b.classList.contains('open');
+  b.classList.toggle('open', !o);
+  a.classList.toggle('open', !o);
+}
+</script>
+</body>
+</html>
